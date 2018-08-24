@@ -1,0 +1,4 @@
+{
+	"psFormat": "table {{.ID}}  {{.Names}}\t{{.Image}}\t{{.Status}}",
+	[...]
+}
