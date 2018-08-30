@@ -1,62 +1,62 @@
 [user]
-  name = Bojan Adzievski
-  email = bojana@tabtale.com
+    name = Bojan Adzievski
+    email = bojana@tabtale.com
 
 [core]
-  editor = vim
-  excludesfile = ~/.gitignore
-  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  ignorecase = false
-  quotepath = false
+    editor = vim
+    excludesfile = ~/.gitignore
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    ignorecase = false
+    quotepath = false
 
 [status]
-  short = true
-  branch = true
+    short = true
+    branch = true
 
 [push]
-  default = simple
+    default = simple
 
 [stash]
-  showPatch = true
+    showPatch = true
 
 [color]
-  ui = auto
+    ui = auto
 
 [log]
-  decorate = auto
-  date = format:%Y-%m-%d %H:%M
+    decorate = auto
+    date = format:%Y-%m-%d %H:%M
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 
 [color "status"]
-  added = yellow bold
-  changed = green bold
-  untracked = cyan bold
+    added = yellow bold
+    changed = green bold
+    untracked = cyan bold
 
 [color "branch"]
-  current = yellow bold
-  local = yellow
-  remote = green
+    current = yellow bold
+    local = yellow
+    remote = green
 
 [grep]
-  break = true
-  heading = true
-  lineNumber = true
+    break = true
+    heading = true
+    lineNumber = true
 
 [alias]
-  lo = log --graph --all --oneline --pretty=format:'%C(auto)%h %C(auto,green)%cr %C(auto,blue)%<(14,trunc)%an %C(auto,magenta) %C(auto)%s %d'
-  ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+    lo = log --graph --all --oneline --pretty=format:'%C(auto)%h %C(auto,green)%cr %C(auto,blue)%<(14,trunc)%an %C(auto,magenta) %C(auto)%s %d'
+    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [diff]
-  tool = vimdiff
+    tool = vimdiff
 
 [difftool]
-  prompt = false
+    prompt = false
 
 [format]
   ; pretty = format:%Cred%h%Creset %C(yellow)(%ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s%Creset
