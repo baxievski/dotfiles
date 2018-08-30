@@ -12,15 +12,13 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'machakann/vim-sandwich'
-Plug 'machakann/vim-highlightedyank'
-Plug 'chr4/nginx.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
 Plug 'roxma/nvim-completion-manager'
@@ -28,7 +26,6 @@ Plug 'morhetz/gruvbox'
 if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-" Plug 'janko-m/vim-test'
 call plug#end()
 " let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
