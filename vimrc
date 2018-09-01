@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'tmhedberg/SimpylFold'
 Plug 'wellle/targets.vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -24,11 +23,9 @@ Plug 'justinmk/vim-dirvish'
 Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
-Plug 'roxma/nvim-completion-manager'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
 Plug 'morhetz/gruvbox'
-if !has('nvim')
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 call plug#end()
 let g:python_highlight_all=1
@@ -64,6 +61,8 @@ set splitbelow
 set splitright
 set mouse=a
 set noswapfile
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
 " set virtualedit+=block
 
 if expand('%:p:h') !~# '^/etc'
@@ -80,6 +79,10 @@ else
   set nobackup
   set noundofile
 endif
+
+augroup ncm2_group
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+augroup END
 
 augroup window_resize
   autocmd!
