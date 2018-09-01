@@ -1,5 +1,8 @@
-" plug
+" vim:fileencoding=utf-8:ft=vim:foldmethod=marker
+
+" plug {{{
 call plug#begin('~/.vim/plugged')
+
 Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -26,8 +29,9 @@ Plug 'morhetz/gruvbox'
 if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
 call plug#end()
-" let g:python_highlight_all=1
+let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
 let g:LanguageClient_changeThrottle=0.2
 let g:LanguageClient_serverCommands={
@@ -36,7 +40,9 @@ let g:LanguageClient_serverCommands={
   \ }
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
-" General
+" }}}
+
+" General {{{
 set termguicolors
 set background=dark
 colorscheme gruvbox
@@ -96,7 +102,9 @@ augroup END
 if has('gui')
   set guifont=Menlo:h9
 endif
-" Mapping
+" }}}
+
+" Mapping {{{
 inoremap <expr> <Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -110,3 +118,5 @@ tnoremap <esc><esc> <c-\><c-n>
 nnoremap <silent><expr> <c-l> (v:count ? ':<C-U>:call <SID>save_change_marks()\|edit\|call <SID>restore_change_marks()<CR>' : '')
       \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
       \ . '<CR><C-L>'
+" }}}
+
