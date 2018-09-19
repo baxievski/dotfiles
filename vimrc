@@ -25,6 +25,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+Plug 'Lenovsky/nuake'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
@@ -114,6 +115,9 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <F4> :Nuake<CR>
+inoremap <F4> <C-\><C-n>:Nuake<CR>
+tnoremap <F4> <C-\><C-n>:Nuake<CR>
 nnoremap <F12> :e ++enc=utf-8<CR>
 nnoremap <leader>gf :e <cfile><cr>
 nnoremap <leader>/ ::g//#<Left><Left>
