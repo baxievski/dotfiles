@@ -90,11 +90,6 @@ augroup window_resize
   autocmd VimResized * :wincmd =
 augroup END
 
-augroup myvimrc
-  autocmd!
-  autocmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc source $MYVIMRC | if has('gui_running') | source $MYGVIMRC | endif
-augroup END
-
 augroup highlight_follows_focus
   autocmd!
   autocmd WinEnter * setlocal cursorline
