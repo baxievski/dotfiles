@@ -37,16 +37,12 @@ if [ "$PS1" ]; then
     if [[ -x "$(which vimx 2> /dev/null)" ]]; then
         alias vim='vimx'
     fi
+    if [[ -x "$(which nvr 2> /dev/null)" ]]; then
+        export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+    fi
     alias ls='ls --color=auto --group-directories-first'
     alias grep='grep --color=auto'
     alias tree='tree -N --dirsfirst'
-    export LESS_TERMCAP_mb=$'\E[01;31m'
-    export LESS_TERMCAP_md=$'\E[01;38;5;74m'
-    export LESS_TERMCAP_me=$'\E[0m'
-    export LESS_TERMCAP_se=$'\E[0m'
-    export LESS_TERMCAP_so=$'\E[32;5;246m'
-    export LESS_TERMCAP_ue=$'\E[0m'
-    export LESS_TERMCAP_us=$'\E[04;38;5;146m'
     shopt -s histappend
     export HISTSIZE=90000
     export HISTFILESIZE=40000000
