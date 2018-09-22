@@ -54,14 +54,14 @@ if [ "$PS1" ]; then
     bind '"\e[B"':history-search-forward
     shopt -s cmdhist
     shopt -s checkwinsize
-    readonly GIT_BRANCH_SYMBOL='ᛘ'
-    readonly GIT_BRANCH_CHANGED_SYMBOL='✚'
+    readonly GIT_BRANCH_SYMBOL=''
+    readonly GIT_BRANCH_CHANGED_SYMBOL='+'
     readonly GIT_STAGED_SYMBOL='●'
     readonly GIT_UNTRACKED_SYMBOL='…'
     readonly GIT_STASHED_SYMBOL='⚑'
     readonly GIT_NEED_PUSH_SYMBOL='↑'
     readonly GIT_NEED_PULL_SYMBOL='↓'
-    readonly VENV_SYMBOL='¤'
+    readonly VENV_SYMBOL=''
     readonly FG_BLACK="\[$(tput setaf 0)\]"
     readonly FG_RED="\[$(tput setaf 1)\]"
     readonly FG_GREEN="\[$(tput setaf 2)\]"
