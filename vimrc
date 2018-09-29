@@ -15,6 +15,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'junegunn/gv.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
@@ -50,12 +51,11 @@ set softtabstop=4
 set expandtab
 set smartindent
 set hidden
-set cursorline
 set lazyredraw
 set nowrap
 set linebreak
 set iskeyword+=-
-set synmaxcol=280
+set synmaxcol=180
 set scrolloff=4
 set sidescrolloff=4
 set splitbelow
