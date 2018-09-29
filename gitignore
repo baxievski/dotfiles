@@ -105,6 +105,7 @@ ENV/
 
 # Other
 .idea/
+.vscode/
 .mr.developer.cfg
 .hg
 .bzr
@@ -122,3 +123,4 @@ ENV/
 *.mat
 *.pkl
 *.dill
+.DS_Store
