@@ -39,6 +39,10 @@ let g:LanguageClient_serverCommands={
   \ }
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
+augroup ncm2_group
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+augroup END
+
 " }}}
 
 " General {{{
@@ -62,7 +66,7 @@ set splitbelow
 set splitright
 set mouse=a
 set noswapfile
-set completeopt=noinsert,menuone,noselect
+set completeopt=longest,menuone,noselect,noinsert,preview
 set shortmess+=c
 " set virtualedit+=block
 
@@ -81,10 +85,6 @@ else
   set noundofile
 endif
 
-augroup ncm2_group
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
-
 augroup window_resize
   autocmd!
   autocmd VimResized * :wincmd =
@@ -94,8 +94,6 @@ augroup highlight_follows_focus
   autocmd!
   autocmd WinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
-  " autocmd FocusGained * setlocal cursorline
-  " autocmd FocusLost * setlocal nocursorline
 augroup END
 
 if has('gui')
@@ -121,4 +119,3 @@ nnoremap <silent><expr> <c-l> (v:count ? ':<C-U>:call <SID>save_change_marks()\|
       \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
       \ . '<CR><C-L>'
 " }}}
-
