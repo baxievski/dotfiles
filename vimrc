@@ -66,9 +66,8 @@ set splitbelow
 set splitright
 set mouse=a
 set noswapfile
-set completeopt=longest,menuone,noselect,noinsert,preview
+set completeopt=noinsert,menuone,noselect
 set shortmess+=c
-" set virtualedit+=block
 
 if expand('%:p:h') !~# '^/etc'
   set backup
