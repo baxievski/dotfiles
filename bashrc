@@ -1,10 +1,12 @@
 if [ "$PS1" ]; then
     export TERM=xterm-256color
     export PATH="$HOME/.cargo/bin:$PATH"
+    export PATH="$HOME/Projects/go/bin:$PATH"
     export PATH="$HOME/bin:$PATH"
     export PATH="$HOME/.local/bin:$PATH"
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    export GOPATH="$HOME/Projects/go"
     if [[ -f /usr/local/etc/bash_completion ]]; then
         source /usr/local/etc/bash_completion
     fi
