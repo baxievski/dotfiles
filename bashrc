@@ -66,50 +66,50 @@ if [ "$PS1" ]; then
     bind '"\e[B"':history-search-forward
     shopt -s cmdhist
     shopt -s checkwinsize
-    readonly GIT_BRANCH_SYMBOL=''
-    readonly GIT_BRANCH_CHANGED_SYMBOL='+'
-    readonly GIT_STAGED_SYMBOL='●'
-    readonly GIT_UNTRACKED_SYMBOL='…'
-    readonly GIT_STASHED_SYMBOL='⚑'
-    readonly GIT_NEED_PUSH_SYMBOL='↑'
-    readonly GIT_NEED_PULL_SYMBOL='↓'
-    readonly VENV_SYMBOL=''
-    readonly FG_BLACK="\[$(tput setaf 0)\]"
-    readonly FG_RED="\[$(tput setaf 1)\]"
-    readonly FG_GREEN="\[$(tput setaf 2)\]"
-    readonly FG_YELLOW="\[$(tput setaf 3)\]"
-    readonly FG_BLUE="\[$(tput setaf 4)\]"
-    readonly FG_MAGENTA="\[$(tput setaf 5)\]"
-    readonly FG_CYAN="\[$(tput setaf 6)\]"
-    readonly FG_GREY="\[$(tput setaf 7)\]"
-    readonly FG_I_BLACK="\[$(tput setaf 8)\]"
-    readonly FG_I_RED="\[$(tput setaf 9)\]"
-    readonly FG_I_GREEN="\[$(tput setaf 10)\]"
-    readonly FG_I_YELLOW="\[$(tput setaf 11)\]"
-    readonly FG_I_BLUE="\[$(tput setaf 12)\]"
-    readonly FG_I_MAGENTA="\[$(tput setaf 13)\]"
-    readonly FG_I_CYAN="\[$(tput setaf 14)\]"
-    readonly FG_I_GREY="\[$(tput setaf 15)\]"
-    readonly BG_BLACK="\[$(tput setab 0)\]"
-    readonly BG_RED="\[$(tput setab 1)\]"
-    readonly BG_GREEN="\[$(tput setab 2)\]"
-    readonly BG_YELLOW="\[$(tput setab 3)\]"
-    readonly BG_BLUE="\[$(tput setab 4)\]"
-    readonly BG_MAGENTA="\[$(tput setab 5)\]"
-    readonly BG_CYAN="\[$(tput setab 6)\]"
-    readonly BG_GREY="\[$(tput setab 7)\]"
-    readonly BG_I_BLACK="\[$(tput setab 8)\]"
-    readonly BG_I_RED="\[$(tput setab 9)\]"
-    readonly BG_I_GREEN="\[$(tput setab 10)\]"
-    readonly BG_I_YELLOW="\[$(tput setab 11)\]"
-    readonly BG_I_BLUE="\[$(tput setab 12)\]"
-    readonly BG_I_MAGENTA="\[$(tput setab 13)\]"
-    readonly BG_I_CYAN="\[$(tput setab 14)\]"
-    readonly BG_I_GREY="\[$(tput setab 15)\]"
-    readonly DIM="\[$(tput dim)\]"
-    readonly REVERSE="\[$(tput rev)\]"
-    readonly RESET="\[$(tput sgr0)\]"
-    readonly BOLD="\[$(tput bold)\]"
+    GIT_BRANCH_SYMBOL=''
+    GIT_BRANCH_CHANGED_SYMBOL='+'
+    GIT_STAGED_SYMBOL='●'
+    GIT_UNTRACKED_SYMBOL='…'
+    GIT_STASHED_SYMBOL='⚑'
+    GIT_NEED_PUSH_SYMBOL='↑'
+    GIT_NEED_PULL_SYMBOL='↓'
+    VENV_SYMBOL=''
+    FG_BLACK="\[$(tput setaf 0)\]"
+    FG_RED="\[$(tput setaf 1)\]"
+    FG_GREEN="\[$(tput setaf 2)\]"
+    FG_YELLOW="\[$(tput setaf 3)\]"
+    FG_BLUE="\[$(tput setaf 4)\]"
+    FG_MAGENTA="\[$(tput setaf 5)\]"
+    FG_CYAN="\[$(tput setaf 6)\]"
+    FG_GREY="\[$(tput setaf 7)\]"
+    FG_I_BLACK="\[$(tput setaf 8)\]"
+    FG_I_RED="\[$(tput setaf 9)\]"
+    FG_I_GREEN="\[$(tput setaf 10)\]"
+    FG_I_YELLOW="\[$(tput setaf 11)\]"
+    FG_I_BLUE="\[$(tput setaf 12)\]"
+    FG_I_MAGENTA="\[$(tput setaf 13)\]"
+    FG_I_CYAN="\[$(tput setaf 14)\]"
+    FG_I_GREY="\[$(tput setaf 15)\]"
+    BG_BLACK="\[$(tput setab 0)\]"
+    BG_RED="\[$(tput setab 1)\]"
+    BG_GREEN="\[$(tput setab 2)\]"
+    BG_YELLOW="\[$(tput setab 3)\]"
+    BG_BLUE="\[$(tput setab 4)\]"
+    BG_MAGENTA="\[$(tput setab 5)\]"
+    BG_CYAN="\[$(tput setab 6)\]"
+    BG_GREY="\[$(tput setab 7)\]"
+    BG_I_BLACK="\[$(tput setab 8)\]"
+    BG_I_RED="\[$(tput setab 9)\]"
+    BG_I_GREEN="\[$(tput setab 10)\]"
+    BG_I_YELLOW="\[$(tput setab 11)\]"
+    BG_I_BLUE="\[$(tput setab 12)\]"
+    BG_I_MAGENTA="\[$(tput setab 13)\]"
+    BG_I_CYAN="\[$(tput setab 14)\]"
+    BG_I_GREY="\[$(tput setab 15)\]"
+    DIM="\[$(tput dim)\]"
+    REVERSE="\[$(tput rev)\]"
+    RESET="\[$(tput sgr0)\]"
+    BOLD="\[$(tput bold)\]"
 
     __git_info() {
         if type "git" > /dev/null; then
@@ -211,6 +211,6 @@ if [ "$PS1" ]; then
     PROMPT_COMMAND='
         history -a;
         #history -n;
-        CDir=$(pwd | sed -E "s.$HOME.~." | sed -E "s.([^/]{1})[^/]{2,}([^/]{1})/.\1…/.g");
+        CDir=$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{2})[^/]{3,}([^/]{1})/|\1…\2/|g");
         ps1'
 fi
