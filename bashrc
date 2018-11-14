@@ -1,10 +1,10 @@
 if [ "$PS1" ]; then
     export TERM=xterm-256color
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export PATH="$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/Projects/go/bin:$PATH"
     export PATH="$HOME/bin:$PATH"
     export PATH="$HOME/.local/bin:$PATH"
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     export GOPATH="$HOME/Projects/go"
     if [[ -f /usr/local/etc/bash_completion ]]; then
@@ -21,16 +21,20 @@ if [ "$PS1" ]; then
         export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init -)"
     fi
+    if [[ -s "~/.rvm/scripts/rvm" ]]; then
+        source "~/.rvm/scripts/rvm"
+        export PATH="$PATH:$HOME/.rvm/bin"
+    fi
     if [[ -f /usr/libexec/java_home ]]; then
         export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
     fi
     if [[ -x "$(which dircolors 2> /dev/null)" ]]; then
         eval $(dircolors -b)
     fi
-    if [[ -x "$(which pipenv 2> /dev/null)" ]]; then
-        export PIPENV_VENV_IN_PROJECT=1
-        eval "$(pipenv --completion)"
-    fi
+    # if [[ -x "$(which pipenv 2> /dev/null)" ]]; then
+    #     export PIPENV_VENV_IN_PROJECT=1
+    #     eval "$(pipenv --completion)"
+    # fi
     if [[ -x "$(which nvim 2> /dev/null)" ]]; then
         export VISUAL=nvim
         export EDITOR="$VISUAL"
@@ -211,6 +215,6 @@ if [ "$PS1" ]; then
     PROMPT_COMMAND='
         history -a;
         #history -n;
-        CDir=$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{2})[^/]{3,}([^/]{1})/|\1…\2/|g");
+        CDir=$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{1})[^/]{4,}([^/]{1})/|\1…/|g");
         ps1'
 fi
