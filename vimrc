@@ -54,6 +54,8 @@ set mouse=a
 set noswapfile
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
 
 if expand('%:p:h') !~# '^/etc'
   set backup
