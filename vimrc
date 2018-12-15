@@ -21,7 +21,6 @@ Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
-Plug 'Lenovsky/nuake'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
