@@ -27,16 +27,8 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
-let g:LanguageClient_changeThrottle=0.2
-let g:LanguageClient_serverCommands={
-  \ 'python': ['pyls'],
-  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-  \ }
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
-augroup ncm2_group
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
 
 " }}}
 
