@@ -21,7 +21,6 @@ Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'Lenovsky/nuake'
