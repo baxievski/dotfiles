@@ -20,7 +20,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
-Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
 Plug 'ncm2/ncm2'
