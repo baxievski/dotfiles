@@ -15,33 +15,19 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-Plug 'junegunn/gv.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
-Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'Lenovsky/nuake'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
 let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
-let g:LanguageClient_changeThrottle=0.2
-let g:LanguageClient_serverCommands={
-  \ 'python': ['pyls'],
-  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-  \ }
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
-augroup ncm2_group
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
 
 " }}}
 
@@ -68,6 +54,8 @@ set mouse=a
 set noswapfile
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
 
 if expand('%:p:h') !~# '^/etc'
   set backup
