@@ -21,8 +21,8 @@ if [ "$PS1" ]; then
         export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init -)"
     fi
-    if [[ -s "~/.rvm/scripts/rvm" ]]; then
-        source "~/.rvm/scripts/rvm"
+    if [[ -f ~/.rvm/scripts/rvm ]]; then
+        source ~/.rvm/scripts/rvm
         export PATH="$PATH:$HOME/.rvm/bin"
     fi
     if [[ -f /usr/libexec/java_home ]]; then
@@ -204,6 +204,11 @@ if [ "$PS1" ]; then
         fi
 
         PS1+="\$ "
+    }
+
+    fd() {
+        local dir
+        dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
     }
 
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
