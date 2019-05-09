@@ -18,6 +18,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
@@ -28,6 +31,13 @@ let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
+let g:LanguageClient_serverCommands={
+  \ 'python': ['pyls'],
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+\ }
+augroup ncm2_group
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+augroup END
 
 " }}}
 
@@ -95,9 +105,6 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-nnoremap <F4> :Nuake<CR>
-inoremap <F4> <C-\><C-n>:Nuake<CR>
-tnoremap <F4> <C-\><C-n>:Nuake<CR>
 nnoremap <F12> :e ++enc=utf-8<CR>
 nnoremap <leader>gf :e <cfile><cr>
 nnoremap <leader>/ ::g//#<Left><Left>

@@ -6,58 +6,79 @@ if [ "$PS1" ]; then
     export PATH="$HOME/bin:$PATH"
     export PATH="$HOME/.local/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-    export GOPATH="$HOME/Projects/go"
+
+    if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]; then
+        source ~/.vim/gitstatus/gitstatus.plugin.sh
+    fi
+
     if [[ -f /usr/local/etc/bash_completion ]]; then
         source /usr/local/etc/bash_completion
     fi
+
     if [[ -f /usr/share/bash-completion/bash_completion ]]; then
         source /usr/share/bash-completion/bash_completion
     fi
+
     if [[ -f ~/.fzf.bash ]]; then
         source ~/.fzf.bash
     fi
+
     if [[ -f ~/.pyenv/bin/pyenv ]]; then
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init -)"
     fi
+
     if [[ -f ~/.rvm/scripts/rvm ]]; then
         source ~/.rvm/scripts/rvm
         export PATH="$PATH:$HOME/.rvm/bin"
     fi
+
     if [[ -f /usr/libexec/java_home ]]; then
         export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
     fi
+
     if [[ -x "$(which dircolors 2> /dev/null)" ]]; then
         eval $(dircolors -b)
     fi
-    # if [[ -x "$(which pipenv 2> /dev/null)" ]]; then
-    #     export PIPENV_VENV_IN_PROJECT=1
-    #     eval "$(pipenv --completion)"
-    # fi
+
+    if [[ -x "$(which pipenv 2> /dev/null)" ]]; then
+        export PIPENV_VENV_IN_PROJECT=1
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        # eval "$(pipenv --completion)"
+    fi
+
     if [[ -x "$(which nvim 2> /dev/null)" ]]; then
         export VISUAL=nvim
         export EDITOR="$VISUAL"
-        export ONI_NEOVIM_PATH=$(which nvim)
     else
         export VISUAL=vim
         export EDITOR="$VISUAL"
     fi
+
     if [[ -x "$(which vimx 2> /dev/null)" ]]; then
         alias vim='vimx'
     fi
+
     if [[ -x "$(which nvr 2> /dev/null)" ]]; then
         export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
     fi
+
     alias ls='ls --color=auto --group-directories-first'
     alias grep='grep --color=auto'
     alias tree='tree -N --dirsfirst'
+
     shopt -s histappend
+    shopt -s cmdhist
+    shopt -s checkwinsize
+
     export HISTSIZE=90000
     export HISTFILESIZE=40000000
     export HISTIGNORE='cd:ls:[bf]g:exit'
     export HISTCONTROL='ignorespace:ignoredups:erasedups:ignoreboth'
     export HISTTIMEFORMAT="%Y-%m-%d %T "
+
     export LESS_TERMCAP_mb=$'\E[01;31m'
     export LESS_TERMCAP_md=$'\E[01;38;5;74m'
     export LESS_TERMCAP_me=$'\E[0m'
@@ -65,11 +86,11 @@ if [ "$PS1" ]; then
     export LESS_TERMCAP_so=$'\E[32;5;246m'
     export LESS_TERMCAP_ue=$'\E[0m'
     export LESS_TERMCAP_us=$'\E[04;38;5;146m'
+
     bind Space:magic-space
     bind '"\e[A"':history-search-backward
     bind '"\e[B"':history-search-forward
-    shopt -s cmdhist
-    shopt -s checkwinsize
+
     GIT_BRANCH_SYMBOL=''
     GIT_BRANCH_CHANGED_SYMBOL='+'
     GIT_STAGED_SYMBOL='●'
@@ -115,9 +136,18 @@ if [ "$PS1" ]; then
     RESET="\[$(tput sgr0)\]"
     BOLD="\[$(tput bold)\]"
 
-    __git_info() {
+    function __venv_info() {
+        if [[ -z "$VIRTUAL_ENV" ]]; then
+            return
+        fi
+
+        printf "($(basename $VIRTUAL_ENV))"
+    }
+
+    function __git_fallback_info() {
         if type "git" > /dev/null; then
             local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
+
             if [[ -z "$branch" ]]; then
                 return
             fi
@@ -156,54 +186,81 @@ if [ "$PS1" ]; then
         fi
     }
 
-    __venv_info() {
-        if test -z "$VIRTUAL_ENV" ; then
-            return
-        fi
-        printf "($VENV_SYMBOL$(basename $VIRTUAL_ENV))"
-    }
+    function __my_prompt() {
+        history -a;
 
-    ps1() {
         local HOSTN=$(uname --nodename)
 
-        if [[ 0 -eq "$UID" ]]
-        then
+        if [[ 0 -eq "$UID" ]]; then
             local HOST_FG_COL="$FG_RED"
-        elif [[ "riemann" == "$HOSTN" ]]
-        then
+        elif [[ "riemann" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_CYAN"
-        elif [[ "cauchy" == "$HOSTN" ]]
-        then
+        elif [[ "cauchy" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_YELLOW"
-        elif [[ "dirac" == "$HOSTN" ]]
-        then
+        elif [[ "dirac" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_I_BLUE"
-        elif [[ "bojan_tt" == "$HOSTN" ]]
-        then
+        elif [[ "bojan_tt" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_BLUE"
         else
             local HOST_FG_COL="$FG_MAGENTA"
         fi
 
-        if [[ "False" == "$PS1_SHOW_HOST" ]]
-        then
+        if [[ "False" == "$PS1_SHOW_HOST" ]]; then
             PS1=""
         else
             PS1="$HOST_FG_COL\u@\h$RESET:"
         fi
 
-        PS1+="$FG_GREY$CDir$RESET"
+        PS1+="$FG_GREY$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")$RESET";
 
-        if [[ "False" != "$PS1_SHOW_VENV" ]]
-        then
-            PS1+="$FG_I_BLUE$(__venv_info)$RESET"
+        if [[ "False" != "$PS1_SHOW_GIT" ]]; then
+            if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
+                PS1+="$FG_I_GREEN($GIT_BRANCH_SYMBOL"
+
+                if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
+                    PS1+="${VCS_STATUS_LOCAL_BRANCH//\\/\\\\}"  # escape backslash
+                else
+                    PS1+="@${VCS_STATUS_COMMIT//\\/\\\\}"       # escape backslash
+                fi
+
+                if [[ "$VCS_STATUS_HAS_UNSTAGED" == 1 ]]; then
+                    PS1+=" $GIT_BRANCH_CHANGED_SYMBOL"
+                fi
+
+                if [[ "$VCS_STATUS_HAS_STAGED" == 1 ]]; then
+                    PS1+=" $GIT_STAGED_SYMBOL"
+                fi
+
+                if [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]]; then
+                    PS1+=" $GIT_UNTRACKED_SYMBOL"
+                fi
+
+                if [[ "$VCS_STATUS_COMMITS_AHEAD" -gt 0 ]]; then
+                    PS1+=" $GIT_NEED_PUSH_SYMBOL${VCS_STATUS_COMMITS_AHEAD}"
+                fi
+
+                if [[ "$VCS_STATUS_COMMITS_BEHIND" -gt 0 ]]; then
+                    PS1+=" $GIT_NEED_PULL_SYMBOL${VCS_STATUS_COMMITS_BEHIND}"
+                fi
+
+                if [[ "$VCS_STATUS_STASHES" -gt 0 ]]; then
+                    PS1+=" $GIT_STASHED_SYMBOL${VCS_STATUS_STASHES}"
+                fi
+                PS1+=")$RESET"
+            else
+                PS1+="$FG_I_GREEN$(__git_fallback_info)$RESET"
+            fi
         fi
-        if [[ "False" != "$PS1_SHOW_GIT" ]]
-        then
-            PS1+="$FG_I_GREEN$(__git_info)$RESET"
+
+        if [[ "False" != "$PS1_SHOW_VENV" ]]; then
+            PS1+="$FG_I_BLUE$(__venv_info)$RESET"
         fi
 
         PS1+="\$ "
+
+        if type promptvars 2>/dev/null; then
+            shopt -u promptvars  # disable expansion of '$(...)' and the like
+        fi
     }
 
     fd() {
@@ -211,15 +268,14 @@ if [ "$PS1" ]; then
         dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
     }
 
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
         PS1_SHOW_HOST=True
     else
         PS1_SHOW_HOST=False
     fi
 
-    PROMPT_COMMAND='
-        history -a;
-        #history -n;
-        CDir=$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{1})[^/]{4,}([^/]{1})/|\1…/|g");
-        ps1'
+    if type gitstatus_stop &>/dev/null && type gitstatus_start &>/dev/null; then
+        gitstatus_stop && gitstatus_start
+    fi
+    PROMPT_COMMAND=__my_prompt
 fi
