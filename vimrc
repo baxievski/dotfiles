@@ -25,8 +25,13 @@ Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
+Plug 'datMaffin/vim-colors-bionik'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
+let g:gruvbox_italic=1                                                                                                                                           
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
 let g:python_highlight_all=1
 let g:dirvish_mode=':sort ,^.*[\/],'
 let g:loaded_netrw=1
@@ -43,8 +48,8 @@ augroup END
 
 " General {{{
 set termguicolors
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme PaperColor
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4

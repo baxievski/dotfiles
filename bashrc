@@ -49,16 +49,16 @@ if [ "$PS1" ]; then
         # eval "$(pipenv --completion)"
     fi
 
+    if [[ -x "$(which vimx 2> /dev/null)" ]]; then
+        alias vim='vimx'
+    fi
+
     if [[ -x "$(which nvim 2> /dev/null)" ]]; then
         export VISUAL=nvim
         export EDITOR="$VISUAL"
     else
         export VISUAL=vim
         export EDITOR="$VISUAL"
-    fi
-
-    if [[ -x "$(which vimx 2> /dev/null)" ]]; then
-        alias vim='vimx'
     fi
 
     if [[ -x "$(which nvr 2> /dev/null)" ]]; then
@@ -198,7 +198,7 @@ if [ "$PS1" ]; then
         elif [[ "cauchy" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_YELLOW"
         elif [[ "dirac" == "$HOSTN" ]]; then
-            local HOST_FG_COL="$FG_I_BLUE"
+            local HOST_FG_COL="$FG_BLUE"
         elif [[ "bojan_tt" == "$HOSTN" ]]; then
             local HOST_FG_COL="$FG_BLUE"
         else
@@ -211,11 +211,11 @@ if [ "$PS1" ]; then
             PS1="$HOST_FG_COL\u@\h$RESET:"
         fi
 
-        PS1+="$FG_GREY$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")$RESET";
+        PS1+="$FG_BLACK$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")$RESET";
 
         if [[ "False" != "$PS1_SHOW_GIT" ]]; then
             if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
-                PS1+="$FG_I_GREEN($GIT_BRANCH_SYMBOL"
+                PS1+="$FG_GREEN($GIT_BRANCH_SYMBOL"
 
                 if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
                     PS1+="${VCS_STATUS_LOCAL_BRANCH//\\/\\\\}"  # escape backslash
@@ -248,12 +248,12 @@ if [ "$PS1" ]; then
                 fi
                 PS1+=")$RESET"
             else
-                PS1+="$FG_I_GREEN$(__git_fallback_info)$RESET"
+                PS1+="$FG_GREEN$(__git_fallback_info)$RESET"
             fi
         fi
 
         if [[ "False" != "$PS1_SHOW_VENV" ]]; then
-            PS1+="$FG_I_BLUE$(__venv_info)$RESET"
+            PS1+="$FG_BLUE$(__venv_info)$RESET"
         fi
 
         PS1+="\$ "
