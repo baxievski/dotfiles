@@ -56,6 +56,7 @@ if [ "$PS1" ]; then
     if [[ -x "$(which nvim 2> /dev/null)" ]]; then
         export VISUAL=nvim
         export EDITOR="$VISUAL"
+        alias vim='nvim'
     else
         export VISUAL=vim
         export EDITOR="$VISUAL"
