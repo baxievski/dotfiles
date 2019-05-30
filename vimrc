@@ -25,8 +25,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
-Plug 'datMaffin/vim-colors-bionik'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'schickele/vim-fruchtig'
 
 call plug#end()
 let g:gruvbox_italic=1                                                                                                                                           
@@ -49,7 +48,7 @@ augroup END
 " General {{{
 set termguicolors
 set background=light
-colorscheme PaperColor
+colorscheme fruchtig
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
