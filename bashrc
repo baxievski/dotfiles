@@ -1,4 +1,4 @@
-if [ "$PS1" ]; then
+if [[ "$PS1" ]]; then
     export TERM=xterm-256color
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export PATH="$HOME/.cargo/bin:$PATH"
@@ -6,6 +6,8 @@ if [ "$PS1" ]; then
     export PATH="$HOME/bin:$PATH"
     export PATH="$HOME/.local/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
 
     if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]; then
         source ~/.vim/gitstatus/gitstatus.plugin.sh
@@ -44,8 +46,6 @@ if [ "$PS1" ]; then
 
     if [[ -x "$(which pipenv 2> /dev/null)" ]]; then
         export PIPENV_VENV_IN_PROJECT=1
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
         # eval "$(pipenv --completion)"
     fi
 
@@ -87,6 +87,9 @@ if [ "$PS1" ]; then
     export LESS_TERMCAP_so=$'\E[32;5;246m'
     export LESS_TERMCAP_ue=$'\E[0m'
     export LESS_TERMCAP_us=$'\E[04;38;5;146m'
+
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
 
     bind Space:magic-space
     bind '"\e[A"':history-search-backward
@@ -162,16 +165,16 @@ if [ "$PS1" ]; then
             local untrackedN="$(git ls-files --others --exclude-standard | wc -l)"
             local stashedN="$(git stash list | wc -l)"
 
-            if [[ "$changedN" -ne 0 ]]; then
+            if [[ "$changedN" != 0 ]]; then
                 marks+=" $GIT_BRANCH_CHANGED_SYMBOL$changedN"
             fi
-            if [[ "$stagedN" -ne 0 ]]; then
+            if [[ "$stagedN" != 0 ]]; then
                 marks+=" $GIT_STAGED_SYMBOL$stagedN"
             fi
-            if [[ "$stashedN" -ne 0 ]]; then
+            if [[ "$stashedN" != 0 ]]; then
                 marks+=" $GIT_STASHED_SYMBOL$stashedN"
             fi
-            if [[ "$untrackedN" -ne 0 ]]; then
+            if [[ "$untrackedN" != 0 ]]; then
                 marks+=" $GIT_UNTRACKED_SYMBOL$untrackedN"
             fi
             if [[ -n "$aheadN" ]]; then
@@ -188,33 +191,36 @@ if [ "$PS1" ]; then
     }
 
     function __my_prompt() {
+        local exit_code="$?"
         history -a;
 
         local HOSTN=$(uname --nodename)
 
-        if [[ 0 -eq "$UID" ]]; then
+        if [[ "$UID" == 0 ]]; then
             local HOST_FG_COL="$FG_RED"
-        elif [[ "riemann" == "$HOSTN" ]]; then
+        elif [[ "$HOSTN" == "riemann" ]]; then
             local HOST_FG_COL="$FG_CYAN"
-        elif [[ "cauchy" == "$HOSTN" ]]; then
+        elif [[ "$HOSTN" == "cauchy" ]]; then
             local HOST_FG_COL="$FG_YELLOW"
-        elif [[ "dirac" == "$HOSTN" ]]; then
+        elif [[ "$HOSTN" == "dirac" ]]; then
             local HOST_FG_COL="$FG_BLUE"
-        elif [[ "bojan_tt" == "$HOSTN" ]]; then
+        elif [[ "$HOSTN" == "bojan_tt" ]]; then
             local HOST_FG_COL="$FG_BLUE"
         else
             local HOST_FG_COL="$FG_MAGENTA"
         fi
 
-        if [[ "False" == "$PS1_SHOW_HOST" ]]; then
+        if [[ "$PS1_SHOW_HOST" == "False" ]]; then
             PS1=""
         else
             PS1="$HOST_FG_COL\u@\h$RESET:"
         fi
 
-        PS1+="$FG_BLACK$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")$RESET";
+        PS1+="$RESET"
+        PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")"
+        PS1+="$RESET"
 
-        if [[ "False" != "$PS1_SHOW_GIT" ]]; then
+        if [[ "$PS1_SHOW_GIT" != "False" ]]; then
             if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
                 PS1+="$FG_GREEN($GIT_BRANCH_SYMBOL"
 
@@ -253,15 +259,15 @@ if [ "$PS1" ]; then
             fi
         fi
 
-        if [[ "False" != "$PS1_SHOW_VENV" ]]; then
+        if [[ "$PS1_SHOW_VENV" != "False"  ]]; then
             PS1+="$FG_BLUE$(__venv_info)$RESET"
         fi
 
-        PS1+="\$ "
-
-        if type promptvars 2>/dev/null; then
-            shopt -u promptvars  # disable expansion of '$(...)' and the like
+        if [[ $exit_code != 0 ]]; then
+            PS1+="$FG_I_RED"
         fi
+        PS1+="\$"
+        PS1+="$RESET "
     }
 
     fd() {
