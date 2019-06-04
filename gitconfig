@@ -54,7 +54,7 @@
     lg2 = !"git lg2-specific --all"
 
     lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(auto)%h%C(reset) %C(blue)%ae%C(reset) %C(green)(%ar)%C(reset) %C(auto)%s%C(reset) %C(auto)%d%C(reset)'
-    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%w(,0,9)%C(auto)%h%C(reset) %C(blue)%ae%C(reset) %C(cyan)%ad (%ar)%C(reset)%C(auto)%d%C(reset)%n%C(auto)%s%C(reset)'
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%w(,0,8)%C(auto)%h%C(reset) %C(blue)%ae%C(reset) %C(cyan)%ad (%ar)%C(reset)%C(auto)%d%C(reset)%n%C(auto)%s%C(reset)'
 
 [diff]
     tool = vimdiff
