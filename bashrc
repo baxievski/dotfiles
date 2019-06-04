@@ -190,9 +190,32 @@ if [[ "$PS1" ]]; then
         fi
     }
 
+    function __check_cd() {
+        if [[ "$LAST_PWD" != "$PWD" ]]; then
+            __post_cd_hooks
+        fi
+        LAST_PWD=$PWD
+    }
+
+    function __post_cd_hooks() {
+        __set_local_histfile
+    }
+
+    function __set_local_histfile() {
+        #history -w # write current history file
+        local HISTDIR="$HOME/.vim/bash_history.d$PWD" # use nested folders for history
+        if [ ! -d "$HISTDIR" ]; then # create folder if needed
+            mkdir -p "$HISTDIR"
+        fi
+        export HISTFILE="$HISTDIR/${USER}_bash_history.txt" # set new history file
+        history -c #clear memory
+        history -r #read from current histfile
+    }
+
     function __my_prompt() {
         local exit_code="$?"
-        history -a;
+        history -a
+        __check_cd
 
         local HOSTN=$(uname --nodename)
 
@@ -217,7 +240,7 @@ if [[ "$PS1" ]]; then
         fi
 
         PS1+="$RESET"
-        PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{3})[^/]{8,}([^/]{2})/|\1…\2/|g")"
+        PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{1})[^/]{2,}([^/]{0})/|\1…\2/|g")"
         PS1+="$RESET"
 
         if [[ "$PS1_SHOW_GIT" != "False" ]]; then
@@ -270,7 +293,7 @@ if [[ "$PS1" ]]; then
         PS1+="$RESET "
     }
 
-    fd() {
+    function fd() {
         local dir
         dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
     }
@@ -284,5 +307,6 @@ if [[ "$PS1" ]]; then
     if type gitstatus_stop &>/dev/null && type gitstatus_start &>/dev/null; then
         gitstatus_stop && gitstatus_start
     fi
+
     PROMPT_COMMAND=__my_prompt
 fi
