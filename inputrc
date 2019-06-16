@@ -1,9 +1,13 @@
 set show-all-if-ambiguous On
+set show-all-if-unmodified On
+set colored-stats On
 set visible-stats On
 set mark-directories On
+set mark-symlinked-directories On
 set bell-style none
 set editing-mode emacs
 set completion-query-items 300
+set completion-ignore-case On
 "\C-xa": alias-expand-line
 "\C-xq": "\eb\"\ef\""
 "\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
