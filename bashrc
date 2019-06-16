@@ -86,7 +86,7 @@ shopt -s histappend
 shopt -s cmdhist
 shopt -s checkwinsize
 
-alias ls='ls --color=auto --group-directories-first'
+alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
 
