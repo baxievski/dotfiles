@@ -11,3 +11,7 @@ set completion-ignore-case On
 "\C-xa": alias-expand-line
 "\C-xq": "\eb\"\ef\""
 "\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+"^[f": forward-word
+"^[b": backward-word
+"ƒ": forward-word
+"∫": backward-word
