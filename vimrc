@@ -26,6 +26,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
 Plug 'schickele/vim-fruchtig'
+Plug 'lifepillar/vim-gruvbox8'
 
 call plug#end()
 let g:gruvbox_italic=1                                                                                                                                           
