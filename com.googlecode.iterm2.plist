@@ -406,6 +406,11 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
+	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
+	<array>
+		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
+		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
+	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -429,6 +434,11 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSTouchBarConfig: regular</key>
 	<dict>
 		<key>CurrentItems</key>
@@ -455,6 +465,8 @@
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>489 279 445 103 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>640 673 400 129 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
@@ -462,7 +474,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>58 1523 592 584 -97 1050 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1680 1027 0 0 1680 1027 </string>
+	<string>190 160 970 566 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 0 1680 1027 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -1064,7 +1076,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>2</integer>
 			<key>Rows</key>
-			<integer>60</integer>
+			<integer>48</integer>
 			<key>Screen</key>
 			<integer>0</integer>
 			<key>Scrollback Lines</key>
@@ -3399,26 +3411,30 @@
 			<string>/Users/bojan</string>
 		</dict>
 	</array>
+	<key>NoSyncAllAppVersions</key>
+	<array>
+		<string>3.3.0beta10</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.0beta12</string>
+		<string>3.3.0beta11</string>
+	</array>
 	<key>NoSyncBFPFavorites</key>
 	<array>
-		<string>Menlo</string>
-		<string>DejaVu Sans Mono</string>
-		<string>Hack</string>
 		<string>Noto Mono</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Fira Code</string>
-		<string>Noto Sans Mono</string>
+		<string>DejaVu Sans Mono</string>
+		<string>Fira Mono</string>
 		<string>Menlo</string>
-		<string>Noto Mono</string>
+		<string>Monaco</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{522, 859}</string>
+		<string>{522, 860}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3431,7 +3447,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>579011319.41774595</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>39</integer>
+	<integer>50</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>575480290.54316604</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -3625,6 +3641,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>tmuxPaneTitle</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>rows</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -3721,6 +3745,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>commandLine</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -3740,7 +3772,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.name</string>
+				<string>currentTab.currentSession.presentationName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3748,15 +3780,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>titleOverrideFormat</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.username</string>
+				<string>currentTab.iterm2.localhostName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3772,7 +3796,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.presentationName</string>
+				<string>currentTab.currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3780,7 +3804,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.jobName</string>
+				<string>currentTab.currentSession.terminalWindowName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3796,23 +3820,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>titleOverride</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>currentTab.currentSession</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3828,7 +3836,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.terminalWindowName</string>
+				<string>titleOverride</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3836,7 +3844,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.tab</string>
+				<string>currentTab.currentSession.name</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3852,7 +3860,39 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>currentTab.currentSession.path</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.commandLine</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.hostname</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>currentTab.currentSession.tty</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.username</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3868,7 +3908,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.iterm2.localhostName</string>
+				<string>titleOverrideFormat</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3876,7 +3916,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.path</string>
+				<string>currentTab.currentSession.jobName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3884,7 +3924,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession.hostname</string>
+				<string>currentTab.currentSession.tab</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3999,6 +4039,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>tmuxWindowName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>window</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -4024,6 +4072,14 @@
 				<true/>
 				<key>name</key>
 				<string>tmuxWindow</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxWindowTitle</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -4109,7 +4165,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-06-03T10:31:29Z</date>
+	<date>2019-07-05T08:26:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4161,7 +4217,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.0beta9</string>
+	<string>3.3.0beta13</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
