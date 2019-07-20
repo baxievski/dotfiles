@@ -56,6 +56,10 @@ else
     export EDITOR="$VISUAL"
 fi
 
+if type "exa" &> /dev/null; then
+    alias exa='exa --group-directories-first'
+fi
+
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Projects/go/bin:$PATH"
