@@ -27,6 +27,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
 Plug 'schickele/vim-fruchtig'
 Plug 'lifepillar/vim-gruvbox8'
+Plug 'cormacrelf/vim-colors-github'
 
 call plug#end()
 let g:gruvbox_italic=1                                                                                                                                           
@@ -49,7 +50,7 @@ augroup END
 " General {{{
 set termguicolors
 set background=light
-colorscheme fruchtig
+colorscheme github
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
