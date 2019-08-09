@@ -24,6 +24,10 @@ if [[ -f ~/.pyenv/bin/pyenv ]]; then
     eval "$(pyenv init -)"
 fi
 
+if [[ -f ~/.poetry/bin/poetry ]]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
 if [[ -f ~/.rvm/scripts/rvm ]]; then
     source ~/.rvm/scripts/rvm
     export PATH="$PATH:$HOME/.rvm/bin"
@@ -59,6 +63,11 @@ fi
 if type "exa" &> /dev/null; then
     alias exa='exa --group-directories-first'
 fi
+
+for completion_script in ~/.vim/bash_completion.d/*
+do
+    source "$completion_script"
+done
 
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
