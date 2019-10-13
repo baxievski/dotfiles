@@ -1,0 +1,8 @@
+{
+  "auths" : {
+
+  },
+  "stackOrchestrator" : "swarm",
+  "credsStore" : "desktop",
+  "psFormat": "table {{.ID}}  {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"
+}
