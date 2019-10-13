@@ -77,21 +77,21 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;38;5;74m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[32;5;246m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[04;38;5;146m'
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export TERM=xterm-256color
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-export HISTSIZE=90000
-export HISTFILESIZE=40000000
+export HISTSIZE=200000
+export HISTFILESIZE=800000000
 export HISTIGNORE='cd:ls:[bf]g:exit'
 export HISTCONTROL='ignorespace:ignoredups:erasedups:ignoreboth'
 export HISTTIMEFORMAT="%Y-%m-%d %T "
@@ -99,6 +99,7 @@ export HISTTIMEFORMAT="%Y-%m-%d %T "
 shopt -s histappend
 shopt -s cmdhist
 shopt -s checkwinsize
+shopt -s globstar
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
@@ -152,6 +153,8 @@ DIM="\[$(tput dim)\]"
 REVERSE="\[$(tput rev)\]"
 RESET="\[$(tput sgr0)\]"
 BOLD="\[$(tput bold)\]"
+
+PROMPT_DIRTRIM=2
 
 function __venv_info() {
     if [[ -z "$VIRTUAL_ENV" ]]; then
@@ -252,7 +255,8 @@ function __my_prompt() {
     fi
 
     PS1+="$RESET"
-    PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{1})[^/]{2,}([^/]{0})/|\1…\2/|g")"
+    # PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{2})[^/]{3,}[^/]{0}/|\1…/|g")"
+    PS1+="\w"
     PS1+="$RESET"
 
     if [[ "$PS1_SHOW_GIT" != "False" ]]; then
@@ -305,7 +309,7 @@ function __my_prompt() {
     PS1+="$RESET "
 }
 
-function fd() {
+function fdir() {
     local dir
     dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
 }
