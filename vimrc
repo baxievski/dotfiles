@@ -15,18 +15,19 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'machakann/vim-sandwich'
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
-Plug 'morhetz/gruvbox'
-Plug 'schickele/vim-fruchtig'
-Plug 'lifepillar/vim-gruvbox8'
+" Plug 'morhetz/gruvbox'
+" Plug 'schickele/vim-fruchtig'
+" Plug 'lifepillar/vim-gruvbox8'
 Plug 'cormacrelf/vim-colors-github'
 
 call plug#end()
@@ -41,9 +42,9 @@ let g:LanguageClient_serverCommands={
   \ 'python': ['pyls'],
   \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
 \ }
-augroup ncm2_group
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
+" augroup ncm2_group
+"     autocmd BufEnter * call ncm2#enable_for_buffer()
+" augroup END
 
 " }}}
 
@@ -105,8 +106,8 @@ endif
 " }}}
 
 " Mapping {{{
-inoremap <expr> <Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
