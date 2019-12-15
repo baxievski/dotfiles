@@ -14,18 +14,10 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
 fi
 
-if [[ -f ~/.fzf.bash ]]; then
-    source ~/.fzf.bash
-fi
-
 if [[ -f ~/.pyenv/bin/pyenv ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
-fi
-
-if [[ -f ~/.poetry/bin/poetry ]]; then
-    export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
 if [[ -f ~/.rvm/scripts/rvm ]]; then
@@ -41,15 +33,6 @@ if type "dircolors" &> /dev/null; then
     eval $(dircolors -b)
 fi
 
-if type "pipenv" &> /dev/null; then
-    export PIPENV_VENV_IN_PROJECT=1
-    # eval "$(pipenv --completion)"
-fi
-
-if type "vimx" &> /dev/null; then
-    alias vim='vimx'
-fi
-
 if type "nvim" &> /dev/null; then
     export VISUAL=nvim
     export EDITOR="$VISUAL"
@@ -60,18 +43,12 @@ else
     export EDITOR="$VISUAL"
 fi
 
-if type "exa" &> /dev/null; then
-    alias exa='exa --group-directories-first'
-fi
-
 for completion_script in ~/.vim/bash_completion.d/*
 do
     source "$completion_script"
 done
 
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/Projects/go/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -225,6 +202,30 @@ function __set_local_histfile() {
     export HISTFILE="$HISTDIR/${USER}_bash_history.txt" # set new history file
     history -c
     history -r
+}
+
+function ps1_toggle_git () {
+    if [[ "$PS1_SHOW_GIT" != "False" ]]; then
+        PS1_SHOW_GIT="False"
+    else
+        PS1_SHOW_GIT="True"
+    fi
+}
+
+function ps1_toggle_host () {
+    if [[ "$PS1_SHOW_HOST" != "False" ]]; then
+        PS1_SHOW_HOST="False"
+    else
+        PS1_SHOW_HOST="True"
+    fi
+}
+
+function ps1_toggle_venv () {
+    if [[ "$PS1_SHOW_VENV" != "False" ]]; then
+        PS1_SHOW_VENV="False"
+    else
+        PS1_SHOW_VENV="True"
+    fi
 }
 
 function __my_prompt() {
