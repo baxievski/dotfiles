@@ -7,45 +7,22 @@ Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
 Plug 'tmhedberg/SimpylFold'
 Plug 'wellle/targets.vim'
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh', }
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-" Plug 'machakann/vim-sandwich'
-Plug 'justinmk/vim-dirvish'
 Plug 'sheerun/vim-polyglot'
-" Plug 'morhetz/gruvbox'
-" Plug 'schickele/vim-fruchtig'
-" Plug 'lifepillar/vim-gruvbox8'
 Plug 'cormacrelf/vim-colors-github'
 
 call plug#end()
-let g:gruvbox_italic=1                                                                                                                                           
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
 let g:python_highlight_all=1
-let g:dirvish_mode=':sort ,^.*[\/],'
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
-let g:LanguageClient_serverCommands={
-  \ 'python': ['pyls'],
-  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-\ }
-" augroup ncm2_group
-"     autocmd BufEnter * call ncm2#enable_for_buffer()
-" augroup END
-
 " }}}
 
 " General {{{
@@ -106,17 +83,4 @@ endif
 " }}}
 
 " Mapping {{{
-" inoremap <expr> <Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-nnoremap <F12> :e ++enc=utf-8<CR>
-nnoremap <leader>gf :e <cfile><cr>
-nnoremap <leader>/ ::g//#<Left><Left>
-tnoremap <esc><esc> <c-\><c-n>
-nnoremap <silent><expr> <c-l> (v:count ? ':<C-U>:call <SID>save_change_marks()\|edit\|call <SID>restore_change_marks()<CR>' : '')
-      \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
-      \ . '<CR><C-L>'
 " }}}
