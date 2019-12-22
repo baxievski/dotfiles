@@ -1,39 +1,48 @@
-if [[ -z "$PS1" ]]; then
+if [[ -z "$PS1" ]]
+then
     return
 fi
 
-if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]; then
+if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]
+then
     source ~/.vim/gitstatus/gitstatus.plugin.sh
 fi
 
-if [[ -f /usr/local/etc/bash_completion ]]; then
+if [[ -f /usr/local/etc/bash_completion ]]
+then
     source /usr/local/etc/bash_completion
 fi
 
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+if [[ -f /usr/share/bash-completion/bash_completion ]]
+then
     source /usr/share/bash-completion/bash_completion
 fi
 
-if [[ -f ~/.pyenv/bin/pyenv ]]; then
+if [[ -f ~/.pyenv/bin/pyenv ]]
+then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
 
-if [[ -f ~/.rvm/scripts/rvm ]]; then
+if [[ -f ~/.rvm/scripts/rvm ]]
+then
     source ~/.rvm/scripts/rvm
     export PATH="$PATH:$HOME/.rvm/bin"
 fi
 
-if [[ -f /usr/libexec/java_home ]]; then
+if [[ -f /usr/libexec/java_home ]]
+then
     export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 fi
 
-if type "dircolors" &> /dev/null; then
+if type "dircolors" &> /dev/null
+then
     eval $(dircolors -b)
 fi
 
-if type "nvim" &> /dev/null; then
+if type "nvim" &> /dev/null
+then
     export VISUAL=nvim
     export EDITOR="$VISUAL"
     alias vim='nvim'
@@ -134,7 +143,8 @@ BOLD="\[$(tput bold)\]"
 PROMPT_DIRTRIM=2
 
 function __venv_info() {
-    if [[ -z "$VIRTUAL_ENV" ]]; then
+    if [[ -z "$VIRTUAL_ENV" ]]
+    then
         return
     fi
 
@@ -142,13 +152,15 @@ function __venv_info() {
 }
 
 function __git_fallback_info() {
-    if ! type "git" &> /dev/null; then
+    if ! type "git" &> /dev/null
+    then
         return
     fi
 
     local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
 
-    if [[ -z "$branch" ]]; then
+    if [[ -z "$branch" ]]
+    then
         return
     fi
 
@@ -161,22 +173,28 @@ function __git_fallback_info() {
     local untrackedN="$(git ls-files --others --exclude-standard | wc -l)"
     local stashedN="$(git stash list | wc -l)"
 
-    if [[ "$changedN" != 0 ]]; then
+    if [[ "$changedN" != 0 ]]
+    then
         marks+=" $GIT_BRANCH_CHANGED_SYMBOL$changedN"
     fi
-    if [[ "$stagedN" != 0 ]]; then
+    if [[ "$stagedN" != 0 ]]
+    then
         marks+=" $GIT_STAGED_SYMBOL$stagedN"
     fi
-    if [[ "$stashedN" != 0 ]]; then
+    if [[ "$stashedN" != 0 ]]
+    then
         marks+=" $GIT_STASHED_SYMBOL$stashedN"
     fi
-    if [[ "$untrackedN" != 0 ]]; then
+    if [[ "$untrackedN" != 0 ]]
+    then
         marks+=" $GIT_UNTRACKED_SYMBOL$untrackedN"
     fi
-    if [[ -n "$aheadN" ]]; then
+    if [[ -n "$aheadN" ]]
+    then
         marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
     fi
-    if [[ -n "$behindN" ]]; then
+    if [[ -n "$behindN" ]]
+    then
         marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
     fi
 
@@ -184,7 +202,8 @@ function __git_fallback_info() {
 }
 
 function __check_cd() {
-    if [[ "$LAST_PWD" != "$PWD" ]]; then
+    if [[ "$LAST_PWD" != "$PWD" ]]
+    then
         __post_cd_hooks
     fi
     LAST_PWD=$PWD
@@ -196,7 +215,8 @@ function __post_cd_hooks() {
 
 function __set_local_histfile() {
     local HISTDIR="$HOME/.vim/bash_history.d$PWD"
-    if [[ ! -d "$HISTDIR" ]]; then
+    if [[ ! -d "$HISTDIR" ]]
+    then
         mkdir -p "$HISTDIR"
     fi
     export HISTFILE="$HISTDIR/${USER}_bash_history.txt" # set new history file
@@ -205,7 +225,8 @@ function __set_local_histfile() {
 }
 
 function ps1_toggle_git () {
-    if [[ "$PS1_SHOW_GIT" != "False" ]]; then
+    if [[ "$PS1_SHOW_GIT" != "False" ]]
+    then
         PS1_SHOW_GIT="False"
     else
         PS1_SHOW_GIT="True"
@@ -213,7 +234,8 @@ function ps1_toggle_git () {
 }
 
 function ps1_toggle_host () {
-    if [[ "$PS1_SHOW_HOST" != "False" ]]; then
+    if [[ "$PS1_SHOW_HOST" != "False" ]]
+    then
         PS1_SHOW_HOST="False"
     else
         PS1_SHOW_HOST="True"
@@ -221,7 +243,8 @@ function ps1_toggle_host () {
 }
 
 function ps1_toggle_venv () {
-    if [[ "$PS1_SHOW_VENV" != "False" ]]; then
+    if [[ "$PS1_SHOW_VENV" != "False" ]]
+    then
         PS1_SHOW_VENV="False"
     else
         PS1_SHOW_VENV="True"
@@ -235,21 +258,27 @@ function __my_prompt() {
 
     local HOSTN=$(uname --nodename)
 
-    if [[ "$UID" == 0 ]]; then
+    if [[ "$UID" == 0 ]]
+    then
         local HOST_FG_COL="$FG_RED"
-    elif [[ "$HOSTN" == "riemann" ]]; then
+    elif [[ "$HOSTN" == "riemann" ]]
+    then
         local HOST_FG_COL="$FG_CYAN"
-    elif [[ "$HOSTN" == "cauchy" ]]; then
+    elif [[ "$HOSTN" == "cauchy" ]]
+    then
         local HOST_FG_COL="$FG_YELLOW"
-    elif [[ "$HOSTN" == "dirac" ]]; then
+    elif [[ "$HOSTN" == "dirac" ]]
+    then
         local HOST_FG_COL="$FG_BLUE"
-    elif [[ "$HOSTN" == "bojan_tt" ]]; then
+    elif [[ "$HOSTN" == "bojan_tt" ]]
+    then
         local HOST_FG_COL="$FG_BLUE"
     else
         local HOST_FG_COL="$FG_MAGENTA"
     fi
 
-    if [[ "$PS1_SHOW_HOST" == "False" ]]; then
+    if [[ "$PS1_SHOW_HOST" == "False" ]]
+    then
         PS1=""
     else
         PS1="$HOST_FG_COL\u@\h$RESET:"
@@ -260,37 +289,46 @@ function __my_prompt() {
     PS1+="\w"
     PS1+="$RESET"
 
-    if [[ "$PS1_SHOW_GIT" != "False" ]]; then
-        if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
-            PS1+="$FG_GREEN($GIT_BRANCH_SYMBOL"
+    if [[ "$PS1_SHOW_GIT" != "False" ]]
+    then
+        if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]
+        then
+            PS1+="$FG_BLUE($GIT_BRANCH_SYMBOL"
 
-            if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
+            if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]
+            then
                 PS1+="${VCS_STATUS_LOCAL_BRANCH//\\/\\\\}"  # escape backslash
             else
                 PS1+="@${VCS_STATUS_COMMIT//\\/\\\\}"       # escape backslash
             fi
 
-            if [[ "$VCS_STATUS_HAS_UNSTAGED" == 1 ]]; then
+            if [[ "$VCS_STATUS_HAS_UNSTAGED" == 1 ]]
+            then
                 PS1+=" $GIT_BRANCH_CHANGED_SYMBOL"
             fi
 
-            if [[ "$VCS_STATUS_HAS_STAGED" == 1 ]]; then
+            if [[ "$VCS_STATUS_HAS_STAGED" == 1 ]]
+            then
                 PS1+=" $GIT_STAGED_SYMBOL"
             fi
 
-            if [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]]; then
+            if [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]]
+            then
                 PS1+=" $GIT_UNTRACKED_SYMBOL"
             fi
 
-            if [[ "$VCS_STATUS_COMMITS_AHEAD" -gt 0 ]]; then
+            if [[ "$VCS_STATUS_COMMITS_AHEAD" -gt 0 ]]
+            then
                 PS1+=" $GIT_NEED_PUSH_SYMBOL${VCS_STATUS_COMMITS_AHEAD}"
             fi
 
-            if [[ "$VCS_STATUS_COMMITS_BEHIND" -gt 0 ]]; then
+            if [[ "$VCS_STATUS_COMMITS_BEHIND" -gt 0 ]]
+            then
                 PS1+=" $GIT_NEED_PULL_SYMBOL${VCS_STATUS_COMMITS_BEHIND}"
             fi
 
-            if [[ "$VCS_STATUS_STASHES" -gt 0 ]]; then
+            if [[ "$VCS_STATUS_STASHES" -gt 0 ]]
+            then
                 PS1+=" $GIT_STASHED_SYMBOL${VCS_STATUS_STASHES}"
             fi
             PS1+=")$RESET"
@@ -299,12 +337,16 @@ function __my_prompt() {
         fi
     fi
 
-    if [[ "$PS1_SHOW_VENV" != "False"  ]]; then
-        PS1+="$FG_BLUE$(__venv_info)$RESET"
+    if [[ "$PS1_SHOW_VENV" != "False"  ]]
+    then
+        PS1+="$FG_YELLOW$(__venv_info)$RESET"
     fi
 
-    if [[ $exit_code != 0 ]]; then
+    if [[ $exit_code != 0 ]]
+    then
         PS1+="$FG_I_RED"
+    else
+        PS1+="$FG_GREEN"
     fi
     PS1+="\$"
     PS1+="$RESET "
@@ -315,13 +357,15 @@ function fdir() {
     dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
 }
 
-if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]
+then
     PS1_SHOW_HOST=True
 else
     PS1_SHOW_HOST=False
 fi
 
-if type gitstatus_stop &> /dev/null && type gitstatus_start &> /dev/null; then
+if type gitstatus_stop &> /dev/null && type gitstatus_start &> /dev/null
+then
     gitstatus_stop && gitstatus_start
 fi
 
