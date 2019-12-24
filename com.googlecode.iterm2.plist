@@ -375,7 +375,7 @@
 	<key>EnableDivisionView</key>
 	<false/>
 	<key>EnableProxyIcon</key>
-	<true/>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideActivityIndicator</key>
@@ -474,7 +474,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>58 1523 592 584 -97 1050 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1680 1027 0 0 1680 1027 </string>
+	<string>158 349 970 602 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 0 1680 1027 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -747,6 +747,8 @@
 			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>Icon</key>
+			<integer>1</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Jobs to Ignore</key>
@@ -3417,20 +3419,21 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.0beta10</string>
+		<string>3.3.8beta3</string>
 		<string>3.3.5beta2</string>
-		<string>3.3.0beta11</string>
 		<string>3.3.2beta1</string>
-		<string>3.3.0beta12</string>
 		<string>3.3.7beta1</string>
-		<string>3.3.0beta13</string>
 		<string>3.3.7beta3</string>
 		<string>3.3.1beta1</string>
-		<string>3.3.0beta15</string>
 		<string>3.3.3beta2</string>
 		<string>3.3.5beta1</string>
 		<string>3.3.0beta16</string>
+		<string>3.3.0beta15</string>
 		<string>3.3.5beta3</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.0beta12</string>
+		<string>3.3.0beta11</string>
+		<string>3.3.0beta10</string>
 		<string>3.3.7beta2</string>
 		<string>3.3.4beta1</string>
 		<string>3.3.2beta2</string>
@@ -3455,7 +3458,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{522, 860}</string>
+		<string>{508, 753}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3468,7 +3471,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>585488347.03014302</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>137</integer>
+	<integer>143</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4254,6 +4257,8 @@
 	<integer>0</integer>
 	<key>OptionClickMovesCursor</key>
 	<false/>
+	<key>PerPaneBackgroundImage</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -4282,7 +4287,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-14T21:39:32Z</date>
+	<date>2019-12-24T08:17:08Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4293,6 +4298,8 @@
 	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
+	<key>ShowPaneTitles</key>
+	<false/>
 	<key>SmartPlacement</key>
 	<true/>
 	<key>SoundForEsc</key>
@@ -4334,7 +4341,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.8beta1</string>
+	<string>3.3.8beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
