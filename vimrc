@@ -12,7 +12,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
-" Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
@@ -21,8 +21,8 @@ Plug 'cormacrelf/vim-colors-github'
 
 call plug#end()
 let g:python_highlight_all=1
-let g:loaded_netrw=1
-let g:loaded_netrwPlugin=1
+" let g:Loaded_netrw=1
+" let g:loaded_netrwPlugin=1
 " }}}
 
 " General {{{
