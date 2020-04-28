@@ -1,0 +1,7 @@
+set hlsearch
+set incsearch
+set surround
+set commentary
+set visualbell
+set noerrorbells
+nnoremap gd :action GotoDeclaration
