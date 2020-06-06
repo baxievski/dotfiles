@@ -57,6 +57,11 @@ do
     source "$completion_script"
 done
 
+if type "go" &> /dev/null; then
+    export PATH=$PATH:$(go env GOPATH)/bin
+    export GOPATH=$(go env GOPATH)
+fi
+
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -95,14 +100,6 @@ bind Space:magic-space
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
-GIT_BRANCH_SYMBOL=''
-GIT_BRANCH_CHANGED_SYMBOL='+'
-GIT_STAGED_SYMBOL='●'
-GIT_UNTRACKED_SYMBOL='…'
-GIT_STASHED_SYMBOL='⚑'
-GIT_NEED_PUSH_SYMBOL='↑'
-GIT_NEED_PULL_SYMBOL='↓'
-VENV_SYMBOL=''
 FG_BLACK="\[$(tput setaf 0)\]"
 FG_RED="\[$(tput setaf 1)\]"
 FG_GREEN="\[$(tput setaf 2)\]"
@@ -142,18 +139,113 @@ BOLD="\[$(tput bold)\]"
 
 PROMPT_DIRTRIM=2
 
-function __venv_info() {
+function __ps1_venv_info() {
     if [[ -z "$VIRTUAL_ENV" ]]
     then
         return
     fi
 
-    printf "($(basename $VIRTUAL_ENV))"
+    if [[ "$PS1_SHOW_VENV" == "False"  ]]
+    then
+        return
+    fi
+
+    local venv_symbol=''
+    printf "$FG_YELLOW($(basename $VIRTUAL_ENV)$RESET)"
 }
 
-function __git_fallback_info() {
+function __ps1_hostname() {
+    if [[ "$PS1_SHOW_HOST" == "False" ]]; then
+        return
+    fi
+
+    local HOSTN=$(uname --nodename)
+
+    if [[ "$UID" == 0 ]]; then
+        local HOST_FG_COL="$FG_RED"
+    elif [[ "$HOSTN" == "riemann" ]]; then
+        local HOST_FG_COL="$FG_CYAN"
+    elif [[ "$HOSTN" == "cauchy" ]]; then
+        local HOST_FG_COL="$FG_YELLOW"
+    elif [[ "$HOSTN" == "dirac" ]]; then
+        local HOST_FG_COL="$FG_BLUE"
+    elif [[ "$HOSTN" == "bojan-tt-macbook" ]]; then
+        local HOST_FG_COL="$FG_BLUE"
+    else
+        local HOST_FG_COL="$FG_MAGENTA"
+    fi
+
+    if [[ "$PS1_SHOW_HOST" == "False" ]]
+    then
+        PS1=""
+    else
+        PS1="$HOST_FG_COL\u@\h$RESET:"
+    fi
+
+    printf "$HOST_FG_COL\u@\h$RESET:"
+}
+
+function __ps1_git_info() {
+    if [[ "$PS1_SHOW_GIT" == "False" ]]; then
+        return
+    fi
+
     if ! type "git" &> /dev/null
     then
+        return
+    fi
+
+    local git_branch_symbol=''
+    local git_branch_changed_symbol='+'
+    local git_staged_symbol='●'
+    local git_untracked_symbol='…'
+    local git_stashed_symbol='⚑'
+    local git_need_push_symbol='↑'
+    local git_need_pull_symbol='↓'
+    local marks
+
+    if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]
+    then
+        marks=""
+
+        if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]
+        then
+            marks+="${VCS_STATUS_LOCAL_BRANCH//\\/\\\\}"  # escape backslash
+        else
+            marks+="@${VCS_STATUS_COMMIT//\\/\\\\}"       # escape backslash
+        fi
+
+        if [[ "$VCS_STATUS_HAS_UNSTAGED" == 1 ]]
+        then
+            marks+=" $git_branch_changed_symbol"
+        fi
+
+        if [[ "$VCS_STATUS_HAS_STAGED" == 1 ]]
+        then
+            marks+=" $git_staged_symbol"
+        fi
+
+        if [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]]
+        then
+            marks+=" $git_untracked_symbol"
+        fi
+
+        if [[ "$VCS_STATUS_COMMITS_AHEAD" -gt 0 ]]
+        then
+            marks+=" $git_need_push_symbol${VCS_STATUS_COMMITS_AHEAD}"
+        fi
+
+        if [[ "$VCS_STATUS_COMMITS_BEHIND" -gt 0 ]]
+        then
+            marks+=" $git_need_pull_symbol${VCS_STATUS_COMMITS_BEHIND}"
+        fi
+
+        if [[ "$VCS_STATUS_STASHES" -gt 0 ]]
+        then
+            marks+=" $git_stashed_symbol${VCS_STATUS_STASHES}"
+        fi
+
+        printf "$FG_GREEN($git_branch_symbol$marks)$RESET"
         return
     fi
 
@@ -164,7 +256,6 @@ function __git_fallback_info() {
         return
     fi
 
-    local marks
     local stat="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
     local aheadN="$(echo $stat | grep -o 'ahead [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
     local behindN="$(echo $stat | grep -o 'behind [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
@@ -175,30 +266,30 @@ function __git_fallback_info() {
 
     if [[ "$changedN" != 0 ]]
     then
-        marks+=" $GIT_BRANCH_CHANGED_SYMBOL$changedN"
+        marks+=" $git_branch_changed_symbol$changedN"
     fi
     if [[ "$stagedN" != 0 ]]
     then
-        marks+=" $GIT_STAGED_SYMBOL$stagedN"
+        marks+=" $git_staged_symbol$stagedN"
     fi
     if [[ "$stashedN" != 0 ]]
     then
-        marks+=" $GIT_STASHED_SYMBOL$stashedN"
+        marks+=" $git_stashed_symbol$stashedN"
     fi
     if [[ "$untrackedN" != 0 ]]
     then
-        marks+=" $GIT_UNTRACKED_SYMBOL$untrackedN"
+        marks+=" $git_untracked_symbol$untrackedN"
     fi
     if [[ -n "$aheadN" ]]
     then
-        marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
+        marks+=" $git_need_push_symbol$aheadN"
     fi
     if [[ -n "$behindN" ]]
     then
-        marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
+        marks+=" $git_need_pull_symbol$behindN"
     fi
 
-    printf "($GIT_BRANCH_SYMBOL$branch$marks)"
+    printf "$FG_GREEN($git_branch_symbol$branch$marks)$RESET"
 }
 
 function __check_cd() {
@@ -256,91 +347,11 @@ function __my_prompt() {
     history -a
     __check_cd
 
-    local HOSTN=$(uname --nodename)
-
-    if [[ "$UID" == 0 ]]
-    then
-        local HOST_FG_COL="$FG_RED"
-    elif [[ "$HOSTN" == "riemann" ]]
-    then
-        local HOST_FG_COL="$FG_CYAN"
-    elif [[ "$HOSTN" == "cauchy" ]]
-    then
-        local HOST_FG_COL="$FG_YELLOW"
-    elif [[ "$HOSTN" == "dirac" ]]
-    then
-        local HOST_FG_COL="$FG_BLUE"
-    elif [[ "$HOSTN" == "bojan_tt" ]]
-    then
-        local HOST_FG_COL="$FG_BLUE"
-    else
-        local HOST_FG_COL="$FG_MAGENTA"
-    fi
-
-    if [[ "$PS1_SHOW_HOST" == "False" ]]
-    then
-        PS1=""
-    else
-        PS1="$HOST_FG_COL\u@\h$RESET:"
-    fi
-
-    PS1+="$RESET"
-    # PS1+="$(pwd | sed -E "s|$HOME|~|" | sed -E "s|([^/]{2})[^/]{3,}[^/]{0}/|\1…/|g")"
+    PS1=""
+    PS1+="$(__ps1_hostname)"
     PS1+="\w"
-    PS1+="$RESET"
-
-    if [[ "$PS1_SHOW_GIT" != "False" ]]
-    then
-        if gitstatus_query 2> /dev/null && [[ "$VCS_STATUS_RESULT" == ok-sync ]]
-        then
-            PS1+="$FG_BLUE($GIT_BRANCH_SYMBOL"
-
-            if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]
-            then
-                PS1+="${VCS_STATUS_LOCAL_BRANCH//\\/\\\\}"  # escape backslash
-            else
-                PS1+="@${VCS_STATUS_COMMIT//\\/\\\\}"       # escape backslash
-            fi
-
-            if [[ "$VCS_STATUS_HAS_UNSTAGED" == 1 ]]
-            then
-                PS1+=" $GIT_BRANCH_CHANGED_SYMBOL"
-            fi
-
-            if [[ "$VCS_STATUS_HAS_STAGED" == 1 ]]
-            then
-                PS1+=" $GIT_STAGED_SYMBOL"
-            fi
-
-            if [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]]
-            then
-                PS1+=" $GIT_UNTRACKED_SYMBOL"
-            fi
-
-            if [[ "$VCS_STATUS_COMMITS_AHEAD" -gt 0 ]]
-            then
-                PS1+=" $GIT_NEED_PUSH_SYMBOL${VCS_STATUS_COMMITS_AHEAD}"
-            fi
-
-            if [[ "$VCS_STATUS_COMMITS_BEHIND" -gt 0 ]]
-            then
-                PS1+=" $GIT_NEED_PULL_SYMBOL${VCS_STATUS_COMMITS_BEHIND}"
-            fi
-
-            if [[ "$VCS_STATUS_STASHES" -gt 0 ]]
-            then
-                PS1+=" $GIT_STASHED_SYMBOL${VCS_STATUS_STASHES}"
-            fi
-            PS1+=")$RESET"
-        else
-            PS1+="$FG_GREEN$(__git_fallback_info)$RESET"
-        fi
-    fi
-
-    if [[ "$PS1_SHOW_VENV" != "False"  ]]
-    then
-        PS1+="$FG_YELLOW$(__venv_info)$RESET"
-    fi
+    PS1+="$(__ps1_git_info)"
+    PS1+="$(__ps1_venv_info)"
 
     if [[ $exit_code != 0 ]]
     then
