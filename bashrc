@@ -175,14 +175,9 @@ function __ps1_hostname() {
         local HOST_FG_COL="$FG_MAGENTA"
     fi
 
-    if [[ "$PS1_SHOW_HOST" == "False" ]]
-    then
-        PS1=""
-    else
-        PS1="$HOST_FG_COL\u@\h$RESET:"
-    fi
+    marks="\\\u@\h"
 
-    printf "$HOST_FG_COL\u@\h$RESET:"
+    printf "$HOST_FG_COL$marks$RESET:"
 }
 
 function __ps1_git_info() {
