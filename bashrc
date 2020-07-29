@@ -3,6 +3,11 @@ then
     return
 fi
 
+if [[ -f ~/.fzf.bash ]]
+then
+    source ~/.fzf.bash
+fi
+
 if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]
 then
     source ~/.vim/gitstatus/gitstatus.plugin.sh
@@ -376,3 +381,4 @@ then
 fi
 
 PROMPT_COMMAND=__my_prompt
+
