@@ -1146,7 +1146,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>12</integer>
 			<key>Working Directory</key>
 			<string>/Users/bojan</string>
 		</dict>
@@ -3421,6 +3421,8 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+		<string>3.3.12beta3</string>
+		<string>3.3.12beta2</string>
 		<string>3.3.8beta3</string>
 		<string>3.3.5beta2</string>
 		<string>3.3.2beta1</string>
@@ -3481,7 +3483,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>585488347.03014302</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>211</integer>
+	<integer>215</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4305,11 +4307,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-18T09:48:22Z</date>
+	<date>2020-07-03T05:12:07Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>3555765524</integer>
+	<integer>1360575114</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -4363,7 +4365,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.11beta1</string>
+	<string>3.3.12beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
