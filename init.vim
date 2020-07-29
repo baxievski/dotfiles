@@ -17,8 +17,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
-Plug 'cormacrelf/vim-colors-github'
 Plug 'neovim/nvim-lsp'
+Plug 'severij/vadelma'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -33,7 +34,7 @@ let g:python_highlight_all=1
 " General {{{
 set termguicolors
 set background=light
-colorscheme github
+colorscheme vadelma
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -100,25 +101,25 @@ function! s:ConfigureBuffer()
     endif
 endfunction
 
-function! s:SetUpLspHighlights()
-  if !wincent#pinnacle#active()
-    return
-  endif
+" function! s:SetUpLspHighlights()
+"   " if !wincent#pinnacle#active()
+"   "   return
+"   " endif
 
-  execute 'highlight LspDiagnosticsError ' . pinnacle#decorate('italic,underline', 'ModeMsg')
+"   execute 'highlight LspDiagnosticsError ' . pinnacle#decorate('italic,underline', 'ModeMsg')
 
-  execute 'highlight LspDiagnosticsHint ' . pinnacle#decorate('bold,italic,underline', 'Type')
+"   execute 'highlight LspDiagnosticsHint ' . pinnacle#decorate('bold,italic,underline', 'Type')
 
-  execute 'highlight LspDiagnosticsHintSign ' . pinnacle#highlight({
-        \   'bg': pinnacle#extract_bg('ColorColumn'),
-        \   'fg': pinnacle#extract_fg('Type')
-        \ })
+"   execute 'highlight LspDiagnosticsHintSign ' . pinnacle#highlight({
+"         \   'bg': pinnacle#extract_bg('ColorColumn'),
+"         \   'fg': pinnacle#extract_fg('Type')
+"         \ })
 
-  execute 'highlight LspDiagnosticsErrorSign ' . pinnacle#highlight({
-        \   'bg': pinnacle#extract_bg('ColorColumn'),
-        \   'fg': pinnacle#extract_fg('ErrorMsg')
-        \ })
-endfunction
+"   execute 'highlight LspDiagnosticsErrorSign ' . pinnacle#highlight({
+"         \   'bg': pinnacle#extract_bg('ColorColumn'),
+"         \   'fg': pinnacle#extract_fg('ErrorMsg')
+"         \ })
+" endfunction
 
 sign define LspDiagnosticsErrorSign text=✖
 sign define LspDiagnosticsWarningSign text=⚠
@@ -137,7 +138,7 @@ if has('autocmd')
 
     autocmd FileType javascript,typescript,vim  call s:ConfigureBuffer()
 
-    autocmd ColorScheme * call s:SetUpLspHighlights()
+    " autocmd ColorScheme * call s:SetUpLspHighlights()
   augroup END
 endif
 " }}}
