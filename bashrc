@@ -3,6 +3,29 @@ then
     return
 fi
 
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+export TERM=xterm-256color
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export HISTSIZE=200000
+export HISTFILESIZE=800000000
+export HISTIGNORE='cd:ls:[bf]g:exit'
+export HISTCONTROL='ignorespace:ignoredups:erasedups:ignoreboth'
+export HISTTIMEFORMAT="%Y-%m-%d %T "
+
 if [[ -f ~/.fzf.bash ]]
 then
     source ~/.fzf.bash
@@ -41,15 +64,16 @@ then
     export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 fi
 
-if type "dircolors" &> /dev/null
+if command -v "dircolors" &> /dev/null
 then
     eval $(dircolors -b)
 fi
 
-if type "nvim" &> /dev/null
+if command -v "nvim" &> /dev/null
 then
     export VISUAL=nvim
     export EDITOR="$VISUAL"
+    export MANPAGER='nvim +Man!'
     alias vim='nvim'
     alias vimdiff='nvim -d'
 else
@@ -62,35 +86,10 @@ do
     source "$completion_script"
 done
 
-if type "go" &> /dev/null; then
+if command -v "go" &> /dev/null; then
     export PATH=$PATH:$(go env GOPATH)/bin
     export GOPATH=$(go env GOPATH)
 fi
-
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
-
-export TERM=xterm-256color
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-export HISTSIZE=200000
-export HISTFILESIZE=800000000
-export HISTIGNORE='cd:ls:[bf]g:exit'
-export HISTCONTROL='ignorespace:ignoredups:erasedups:ignoreboth'
-export HISTTIMEFORMAT="%Y-%m-%d %T "
 
 shopt -s histappend
 shopt -s cmdhist
@@ -190,7 +189,7 @@ function __ps1_git_info() {
         return
     fi
 
-    if ! type "git" &> /dev/null
+    if ! command -v "git" &> /dev/null
     then
         return
     fi
@@ -365,7 +364,7 @@ function __my_prompt() {
 
 function fdir() {
     local dir
-    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -command -v d -print 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]
@@ -375,7 +374,7 @@ else
     PS1_SHOW_HOST=False
 fi
 
-if type gitstatus_stop &> /dev/null && type gitstatus_start &> /dev/null
+if command -v gitstatus_stop &> /dev/null && command -v gitstatus_start &> /dev/null
 then
     gitstatus_stop && gitstatus_start
 fi
