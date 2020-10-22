@@ -18,7 +18,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
 Plug 'neovim/nvim-lsp'
-Plug 'severij/vadelma'
+Plug 'arzg/vim-colors-xcode'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
@@ -34,7 +34,7 @@ let g:python_highlight_all=1
 " General {{{
 set termguicolors
 set background=light
-colorscheme vadelma
+colorscheme xcodelight
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
