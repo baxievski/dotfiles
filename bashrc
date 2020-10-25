@@ -3,9 +3,13 @@ then
     return
 fi
 
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+case "$OSTYPE" in
+  darwin*)  source ~/.vim/bashrcDarwin.bash ;; 
+  linux*)   source ~/.vim/bashrcLinux.bash ;;
+  *)        ;;
+esac
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
@@ -36,15 +40,6 @@ then
     source ~/.vim/gitstatus/gitstatus.plugin.sh
 fi
 
-if [[ -f /usr/local/etc/bash_completion ]]
-then
-    source /usr/local/etc/bash_completion
-fi
-
-if [[ -f /usr/share/bash-completion/bash_completion ]]
-then
-    source /usr/share/bash-completion/bash_completion
-fi
 
 if [[ -f ~/.pyenv/bin/pyenv ]]
 then
@@ -167,14 +162,6 @@ function __ps1_hostname() {
 
     if [[ "$UID" == 0 ]]; then
         local HOST_FG_COL="$FG_RED"
-    elif [[ "$HOSTN" == "riemann" ]]; then
-        local HOST_FG_COL="$FG_CYAN"
-    elif [[ "$HOSTN" == "cauchy" ]]; then
-        local HOST_FG_COL="$FG_YELLOW"
-    elif [[ "$HOSTN" == "dirac" ]]; then
-        local HOST_FG_COL="$FG_BLUE"
-    elif [[ "$HOSTN" == "bojan-tt-macbook" ]]; then
-        local HOST_FG_COL="$FG_BLUE"
     else
         local HOST_FG_COL="$FG_MAGENTA"
     fi
