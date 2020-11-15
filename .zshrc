@@ -4,7 +4,7 @@ fi
 
 export DOTS="${HOME}/dotfiles"
 export ZSH="${DOTS}/zsh.d/oh-my-zsh"
-ZSH_CUSTOM="${DOTS}/zsh.d/oh-my-zsh-custom"
+export ZSH_CUSTOM="${DOTS}/zsh.d/oh-my-zsh-custom"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -44,14 +44,12 @@ export HISTFILESIZE=9000000000
 export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
 
 [[ ! -f ~/.pyenv/completions/pyenv.zsh ]] || source ~/.pyenv/completions/pyenv.zsh
-[[ ! -f ~/.rvm/scripts/rvm ]] || source ~/.rvm/scripts/rvm; export PATH="$PATH:$HOME/.rvm/bin"
+[[ ! -f ~/.rvm/scripts/rvm ]] || source ~/.rvm/scripts/rvm
 
 HISTDB_TABULATE_CMD=(sed -e $'s/\x1f/\t/g')
 [[ ! -f ${ZSH_CUSTOM}/plugins/zsh-histdb/sqlite-history.zsh ]] || source ${ZSH_CUSTOM}/plugins/zsh-histdb/sqlite-history.zsh
