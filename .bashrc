@@ -46,7 +46,10 @@ then
     eval "$(pyenv init -)"
 fi
 
-# [[ ! -f ~/.rvm/scripts/rvm ]] || source ~/.rvm/scripts/rvm
+if [[ -f ~/.rvm/scripts/rvm ]]
+then
+    source ~/.rvm/scripts/rvm
+fi
 
 if command -v "dircolors" &> /dev/null
 then
