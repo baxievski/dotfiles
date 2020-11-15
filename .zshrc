@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 case "$OSTYPE" in
   darwin*)  [[ ! -f $DOTS/zsh.d/Darwin.zsh ]] || source $DOTS/zsh.d/Darwin.zsh ;; 
   linux*)   [[ ! -f $DOTS/zsh.d/Linux.zsh ]] || source $DOTS/zsh.d/Linux.zsh ;; 
-  *)        ;;m
+  *)        ;;
 esac
 
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
@@ -44,6 +44,7 @@ export HISTFILESIZE=9000000000
 export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
@@ -55,7 +56,6 @@ alias tree='tree -N --dirsfirst'
 HISTDB_TABULATE_CMD=(sed -e $'s/\x1f/\t/g')
 [[ ! -f ${ZSH_CUSTOM}/plugins/zsh-histdb/sqlite-history.zsh ]] || source ${ZSH_CUSTOM}/plugins/zsh-histdb/sqlite-history.zsh
 autoload -Uz add-zsh-hook
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

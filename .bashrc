@@ -3,7 +3,7 @@ then
     return
 fi
 
-export DOTS="${HOME}/.vim"
+export DOTS="${HOME}/dotfiles"
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
@@ -12,8 +12,6 @@ alias tree='tree -N --dirsfirst'
 bind Space:magic-space
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-
-if [[ ! -f ${DOTS}/bash.d/env.bash ]] || source ${DOTS}/bash.d/env.bash
 
 for completion_script in ${DOTS}/bash.d/completion/*
 do
@@ -26,10 +24,20 @@ case "$OSTYPE" in
   *)        ;;
 esac
 
-if [[ ! -f ${DOTS}/gitstatus/gitstatus.plugin.sh ]] || source ${DOTS}/gitstatus/gitstatus.plugin.sh
+if [[ -f ${DOTS}/bash.d/env.bash ]]
+then
+    source ${DOTS}/bash.d/env.bash
+fi
 
-if [[ ! -f ~/.fzf.bash ]] || source ~/.fzf.bash
+if [[ -f ${DOTS}/bash.d/gitstatus/gitstatus.plugin.sh ]]
+then
+    source ${DOTS}/bash.d/gitstatus/gitstatus.plugin.sh
+fi
 
+if [[ -f ${HOME}/.fzf.bash ]]
+then
+    source ${HOME}/.fzf.bash
+fi
 
 if [[ -f ~/.pyenv/bin/pyenv ]]
 then
@@ -38,7 +46,7 @@ then
     eval "$(pyenv init -)"
 fi
 
-[[ ! -f ~/.rvm/scripts/rvm ]] || source ~/.rvm/scripts/rvm; export PATH="$PATH:$HOME/.rvm/bin"
+# [[ ! -f ~/.rvm/scripts/rvm ]] || source ~/.rvm/scripts/rvm
 
 if command -v "dircolors" &> /dev/null
 then
@@ -57,9 +65,7 @@ else
     export EDITOR="$VISUAL"
 fi
 
-
 if command -v "go" &> /dev/null; then
     export PATH=$PATH:$(go env GOPATH)/bin
     export GOPATH=$(go env GOPATH)
 fi
-

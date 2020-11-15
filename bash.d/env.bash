@@ -155,50 +155,7 @@ function __ps1_git_info() {
         printf "$FG_GREEN($git_branch_symbol$marks)$RESET"
         return
     fi
-
-    local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
-
-    if [[ -z "$branch" ]]
-    then
-        return
-    fi
-
-    local stat="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
-    local aheadN="$(echo $stat | grep -o 'ahead [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
-    local behindN="$(echo $stat | grep -o 'behind [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
-    local stagedN="$(git diff --cached --numstat | wc -l)"
-    local changedN="$(git ls-files --modified | wc -l)"
-    local untrackedN="$(git ls-files --others --exclude-standard | wc -l)"
-    local stashedN="$(git stash list | wc -l)"
-
-    if [[ "$changedN" != 0 ]]
-    then
-        marks+=" $git_branch_changed_symbol$changedN"
-    fi
-    if [[ "$stagedN" != 0 ]]
-    then
-        marks+=" $git_staged_symbol$stagedN"
-    fi
-    if [[ "$stashedN" != 0 ]]
-    then
-        marks+=" $git_stashed_symbol$stashedN"
-    fi
-    if [[ "$untrackedN" != 0 ]]
-    then
-        marks+=" $git_untracked_symbol$untrackedN"
-    fi
-    if [[ -n "$aheadN" ]]
-    then
-        marks+=" $git_need_push_symbol$aheadN"
-    fi
-    if [[ -n "$behindN" ]]
-    then
-        marks+=" $git_need_pull_symbol$behindN"
-    fi
-
-    printf "$FG_GREEN($git_branch_symbol$branch$marks)$RESET"
 }
-
 
 function __check_cd() {
     if [[ "$LAST_PWD" != "$PWD" ]]
@@ -289,4 +246,3 @@ then
 fi
 
 PROMPT_COMMAND=__my_prompt
-
