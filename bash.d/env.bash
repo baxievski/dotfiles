@@ -1,16 +1,3 @@
-if [[ -z "$PS1" ]]
-then
-    return
-fi
-
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
-case "$OSTYPE" in
-  darwin*)  source ~/.vim/bashrcDarwin.bash ;; 
-  linux*)   source ~/.vim/bashrcLinux.bash ;;
-  *)        ;;
-esac
-
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -30,74 +17,7 @@ export HISTIGNORE='cd:ls:[bf]g:exit'
 export HISTCONTROL='ignorespace:ignoredups:erasedups:ignoreboth'
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 
-if [[ -f ~/.fzf.bash ]]
-then
-    source ~/.fzf.bash
-fi
-
-if [[ -f ~/.vim/gitstatus/gitstatus.plugin.sh ]]
-then
-    source ~/.vim/gitstatus/gitstatus.plugin.sh
-fi
-
-
-if [[ -f ~/.pyenv/bin/pyenv ]]
-then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
-
-if [[ -f ~/.rvm/scripts/rvm ]]
-then
-    source ~/.rvm/scripts/rvm
-    export PATH="$PATH:$HOME/.rvm/bin"
-fi
-
-if [[ -f /usr/libexec/java_home ]]
-then
-    export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-fi
-
-if command -v "dircolors" &> /dev/null
-then
-    eval $(dircolors -b)
-fi
-
-if command -v "nvim" &> /dev/null
-then
-    export VISUAL=nvim
-    export EDITOR="$VISUAL"
-    export MANPAGER='nvim +Man!'
-    alias vim='nvim'
-    alias vimdiff='nvim -d'
-else
-    export VISUAL=vim
-    export EDITOR="$VISUAL"
-fi
-
-for completion_script in ~/.vim/bash_completion.d/*
-do
-    source "$completion_script"
-done
-
-if command -v "go" &> /dev/null; then
-    export PATH=$PATH:$(go env GOPATH)/bin
-    export GOPATH=$(go env GOPATH)
-fi
-
-shopt -s histappend
-shopt -s cmdhist
-shopt -s checkwinsize
-shopt -s globstar
-
-alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
-alias grep='grep --color=auto'
-alias tree='tree -N --dirsfirst'
-
-bind Space:magic-space
-bind '"\e[A"':history-search-backward
-bind '"\e[B"':history-search-forward
+export PROMPT_DIRTRIM=2
 
 FG_BLACK="\[$(tput setaf 0)\]"
 FG_RED="\[$(tput setaf 1)\]"
@@ -136,7 +56,10 @@ REVERSE="\[$(tput rev)\]"
 RESET="\[$(tput sgr0)\]"
 BOLD="\[$(tput bold)\]"
 
-PROMPT_DIRTRIM=2
+shopt -s histappend
+shopt -s cmdhist
+shopt -s checkwinsize
+shopt -s globstar
 
 function __ps1_venv_info() {
     if [[ -z "$VIRTUAL_ENV" ]]
@@ -157,8 +80,6 @@ function __ps1_hostname() {
     if [[ "$PS1_SHOW_HOST" == "False" ]]; then
         return
     fi
-
-    local HOSTN=$(uname --nodename)
 
     if [[ "$UID" == 0 ]]; then
         local HOST_FG_COL="$FG_RED"
@@ -278,6 +199,7 @@ function __ps1_git_info() {
     printf "$FG_GREEN($git_branch_symbol$branch$marks)$RESET"
 }
 
+
 function __check_cd() {
     if [[ "$LAST_PWD" != "$PWD" ]]
     then
@@ -291,7 +213,7 @@ function __post_cd_hooks() {
 }
 
 function __set_local_histfile() {
-    local HISTDIR="$HOME/.vim/bash_history.d$PWD"
+    local HISTDIR="$HOME/.vim/bash.d/history$PWD"
     if [[ ! -d "$HISTDIR" ]]
     then
         mkdir -p "$HISTDIR"
