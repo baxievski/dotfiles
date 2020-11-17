@@ -54,7 +54,6 @@ alias tree='tree -N --dirsfirst'
 autoload -Uz add-zsh-hook
 
 _zsh_autosuggest_strategy_histdb_top() {
-
     local query="select
     commands.argv
     from history
