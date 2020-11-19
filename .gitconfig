@@ -1,13 +1,13 @@
 [user]
-	name = Bojan Adzievski
-	email = bojana@tabtale.com
+    name = Bojan Adzievski
+    email = bojana@tabtale.com
 
 [core]
     editor = nvim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     ignorecase = false
     quotepath = false
-	pager = delta
+    pager = delta
 
 [status]
     short = true
@@ -72,19 +72,18 @@
     clean = git-lfs clean -- %f
 
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
 
 [delta]
-	features = side-by-side line-numbers decorations
+    features = side-by-side line-numbers decorations
     plus-color = "#012800"
     minus-color = "#340001"
     syntax-theme = Monokai Extended Light
 
 [interactive]
     diffFilter = delta --color-only
-

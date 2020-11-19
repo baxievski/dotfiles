@@ -67,4 +67,5 @@ _zsh_autosuggest_strategy_histdb_top() {
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top
 
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
