@@ -10,6 +10,8 @@ case "$OSTYPE" in
   *)        ;;
 esac
 
+[[ ! -f $DOTS/.env ]] || source $DOTS/.env
+
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 ZSH="${DOTS}/zsh.d/oh-my-zsh"
@@ -18,21 +20,21 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   aws
-  golang
   docker
   docker-compose
-  kubectl
-  minikube
-  helm
-  ripgrep
   fzf
+  golang
+  helm
+  minikube
   pip
-  zsh-histdb
+  ripgrep
   zsh-autosuggestions
+  zsh-histdb
+  my-golang
+  my-kubectl
+  my-nvim
   my-pyenv
   my-rvm
-  my-nvim
-  my-golang
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -68,4 +70,4 @@ _zsh_autosuggest_strategy_histdb_top() {
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f $DOTS/zsh.d/.p10k.zsh ]] || source $DOTS/zsh.d/.p10k.zsh
