@@ -28,13 +28,16 @@ plugins=(
   minikube
   pip
   ripgrep
-  zsh-autosuggestions
-  zsh-histdb
-  my-golang
+  terraform
+  my-fzf
   my-kubectl
   my-nvim
   my-pyenv
   my-rvm
+  my-ssh
+  zsh-autosuggestions
+  zsh-histdb
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -50,6 +53,7 @@ export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
+alias exa='exa --group-directories-first --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
 
@@ -67,6 +71,7 @@ _zsh_autosuggest_strategy_histdb_top() {
     suggestion=$(_histdb_query "$query")
 }
 
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
