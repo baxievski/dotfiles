@@ -3,6 +3,20 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export DOTS="${HOME}/dotfiles"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export TERM=xterm-256color
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export SAVEHIST=900000
+export HISTFILESIZE=9000000000
+export HISTSIZE=500000
+export HIST_STAMPS="yyyy-mm-dd"
+export GLOBALIAS_FILTER_VALUES=(
+  ls
+  exa
+  grep
+  tree
+)
 
 case "$OSTYPE" in
   darwin*)  [[ ! -f $DOTS/zsh.d/Darwin.zsh ]] || source $DOTS/zsh.d/Darwin.zsh ;; 
@@ -12,8 +26,6 @@ esac
 
 [[ ! -f $DOTS/.env ]] || source $DOTS/.env
 
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
 ZSH="${DOTS}/zsh.d/oh-my-zsh"
 ZSH_CUSTOM="${DOTS}/zsh.d/oh-my-zsh-custom"
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -22,18 +34,22 @@ plugins=(
   aws
   docker
   docker-compose
+  fd
   fzf
+  # fzf-tab
+  globalias
   golang
   helm
   minikube
   pip
   ripgrep
   terraform
+  kubectl
+  my-bat
+  my-golang
   my-fzf
-  my-kubectl
   my-nvim
   my-pyenv
-  my-rvm
   my-ssh
   zsh-autosuggestions
   zsh-histdb
@@ -42,20 +58,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export TERM=xterm-256color
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-export SAVEHIST=900000
-export HISTFILESIZE=9000000000
-export HISTSIZE=500000
-export HIST_STAMPS="yyyy-mm-dd"
-
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias exa='exa --group-directories-first --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
+alias t='terraform'
 
 autoload -Uz add-zsh-hook
 

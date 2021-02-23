@@ -23,8 +23,8 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-lua require'nvim_lsp'.pyls.setup{}
-lua require'nvim_lsp'.gopls.setup{}
+lua require'lspconfig'.pyls.setup{}
+lua require'lspconfig'.gopls.setup{}
 
 let g:python_highlight_all=1
 " let g:Loaded_netrw=1
