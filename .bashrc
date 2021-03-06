@@ -293,7 +293,7 @@ fi
 
 function __my_prompt() {
     history -a
-    __check_cd
+    # __check_cd
 
     PS1=""
     PS1+="$(__ps1_hostname)"
