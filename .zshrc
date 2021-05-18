@@ -28,7 +28,6 @@ case "$OSTYPE" in
   *)        ;;
 esac
 
-
 plugins=(
   aws
   docker
@@ -46,6 +45,7 @@ plugins=(
   # my-bat
   my-golang
   my-fzf
+  my-rvm
   my-nvim
   my-pyenv
   my-ssh
@@ -57,11 +57,20 @@ source $ZSH/oh-my-zsh.sh
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey \^U backward-kill-line
 
+# fix for navigation keys in JetBrains terminal
+if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+  bindkey "∫" backward-word     # Option b
+  bindkey "ƒ" forward-word      # Option f
+  bindkey "∂" delete-word       # Option d
+  bindkey "≥" insert-last-word  # Option .
+  bindkey "ç" fzf-cd-widget     # Option c
+fi
+
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias exa='exa --group-directories-first --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
-alias t='terraform'
+alias h='helm'
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
 [[ ! -f $DOTS/zsh.d/.p10k.zsh ]] || source $DOTS/zsh.d/.p10k.zsh

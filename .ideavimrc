@@ -1,7 +1,21 @@
+set relativenumber
+set number
 set hlsearch
+set highlightedyank
 set incsearch
 set surround
 set commentary
 set visualbell
 set noerrorbells
-nnoremap gd :action GotoDeclaration
+set scrolloff=4
+set clipboard+=unnamed
+set showmode
+set history=1000
+
+let mapleader=" "
+nnoremap gd :action GotoDeclaration<CR>
+
+nnoremap <leader>gc :action Vcs.Commit.PrimaryCommitActions<CR>
+nnoremap <leader>t :action Terminal.OpenInTerminal<CR>
+nnoremap <leader>f  :action ReformatCode<CR>
+nnoremap <C-P> :action GotoAction<CR>
