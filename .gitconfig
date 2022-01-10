@@ -87,3 +87,5 @@
 
 [interactive]
     diffFilter = delta --color-only
+[commit]
+	template = /Users/bojan/.stCommitMsg

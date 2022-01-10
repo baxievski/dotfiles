@@ -11,11 +11,13 @@ set scrolloff=4
 set clipboard+=unnamed
 set showmode
 set history=1000
+set ideastatusicon=gray
 
 let mapleader=" "
 nnoremap gd :action GotoDeclaration<CR>
 
 nnoremap <leader>gc :action Vcs.Commit.PrimaryCommitActions<CR>
+nnoremap <leader>g :action Git.MainMenu<CR>
 nnoremap <leader>t :action Terminal.OpenInTerminal<CR>
-nnoremap <leader>f  :action ReformatCode<CR>
+nnoremap <leader>f :action ReformatCode<CR>
 nnoremap <C-P> :action GotoAction<CR>

@@ -13,7 +13,7 @@ GLOBALIAS_FILTER_VALUES=(
   tree
 )
 
-export PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.krew/bin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.krew/bin:/usr/local/opt/libpq/bin:${PATH}"
 export TERM=xterm-256color
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -42,11 +42,13 @@ plugins=(
   ripgrep
   terraform
   kubectl
+  # pyenv
   # my-bat
   my-golang
   my-fzf
   my-rvm
   my-nvim
+  my-rvm
   my-pyenv
   my-ssh
   zsh-histdb
@@ -71,6 +73,9 @@ alias exa='exa --group-directories-first --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
 alias h='helm'
+alias t='terraform'
+alias fd='fd --hidden'
+alias yamllint='yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
 [[ ! -f $DOTS/zsh.d/.p10k.zsh ]] || source $DOTS/zsh.d/.p10k.zsh
