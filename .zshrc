@@ -42,10 +42,7 @@ plugins=(
   ripgrep
   terraform
   kubectl
-  # pyenv
-  # my-bat
   my-golang
-  my-fzf
   my-rvm
   my-nvim
   my-rvm
@@ -58,15 +55,6 @@ source $ZSH/oh-my-zsh.sh
 
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey \^U backward-kill-line
-
-# fix for navigation keys in JetBrains terminal
-if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
-  bindkey "∫" backward-word     # Option b
-  bindkey "ƒ" forward-word      # Option f
-  bindkey "∂" delete-word       # Option d
-  bindkey "≥" insert-last-word  # Option .
-  bindkey "ç" fzf-cd-widget     # Option c
-fi
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias exa='exa --group-directories-first --time-style=long-iso'
