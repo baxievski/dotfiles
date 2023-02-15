@@ -2,9 +2,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-DOTS="${HOME}/dotfiles"
-ZSH="${DOTS}/zsh.d/oh-my-zsh"
-ZSH_CUSTOM="${DOTS}/zsh.d/oh-my-zsh-custom"
+ZSH_D="${HOME}/dotfiles/zsh.d"
+ZSH="${ZSH_D}/oh-my-zsh"
+ZSH_CUSTOM="${ZSH_D}/oh-my-zsh-custom"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 GLOBALIAS_FILTER_VALUES=(
   ls
@@ -23,8 +23,8 @@ export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 
 case "$OSTYPE" in
-  darwin*)  [[ ! -f $DOTS/zsh.d/Darwin.zsh ]] || source $DOTS/zsh.d/Darwin.zsh ;; 
-  linux*)   [[ ! -f $DOTS/zsh.d/Linux.zsh ]] || source $DOTS/zsh.d/Linux.zsh ;; 
+  darwin*)  [[ ! -f ${ZSH_D}/Darwin.zsh ]] || source ${ZSH_D}/Darwin.zsh ;; 
+  linux*)   [[ ! -f ${ZSH_D}/Linux.zsh ]] || source ${ZSH_D}/Linux.zsh ;; 
   *)        ;;
 esac
 
@@ -42,7 +42,9 @@ plugins=(
   ripgrep
   terraform
   kubectl
+  minikube
   my-golang
+  my-goenv
   my-rvm
   my-nvim
   my-rvm
@@ -63,7 +65,10 @@ alias tree='tree -N --dirsfirst'
 alias h='helm'
 alias t='terraform'
 alias fd='fd --hidden'
+alias kx='kubectx'
 alias yamllint='yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
-[[ ! -f $DOTS/zsh.d/.p10k.zsh ]] || source $DOTS/zsh.d/.p10k.zsh
+[[ ! -f ${ZSH_D}/.p10k.zsh ]] || source ${ZSH_D}/.p10k.zsh
+
+source /Users/bojan/.docker/init-zsh.sh || true # Added by Docker Desktop
