@@ -2,6 +2,13 @@
 	name = baxievski
 	email = bojan.axievski@gmail.com
 
+[http]
+	postBuffer = 524288000
+	sslVerify = false
+
+[remote "origin"]
+	proxy = 
+
 [core]
     editor = nvim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -9,6 +16,7 @@
     quotepath = false
     pager = delta
 	excludesfile = /Users/bojan/.gitignore_global
+	autocrlf = input
 
 [status]
     short = true

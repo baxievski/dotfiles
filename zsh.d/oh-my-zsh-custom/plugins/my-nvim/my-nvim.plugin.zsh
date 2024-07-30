@@ -1,4 +1,4 @@
-if command -v "nvim" &> /dev/null
+if [[ $(type "nvim" &> /dev/null) ]]
 then
     export VISUAL=nvim
     export EDITOR="$VISUAL"

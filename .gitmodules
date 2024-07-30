@@ -19,3 +19,6 @@
 [submodule "zsh.d/oh-my-zsh-custom/plugins/fzf-tab"]
 	path = zsh.d/oh-my-zsh-custom/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab.git
+[submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-histdb-fzf"]
+	path = zsh.d/oh-my-zsh-custom/plugins/zsh-histdb-fzf
+	url = https://github.com/m42e/zsh-histdb-fzf
