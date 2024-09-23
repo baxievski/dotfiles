@@ -1,7 +1,6 @@
 ZSH_D="${HOME}/dotfiles/zsh.d"
 ZSH="${ZSH_D}/oh-my-zsh"
 ZSH_CUSTOM="${ZSH_D}/oh-my-zsh-custom"
-STARSHIP_CONFIG="${HOME}/starship.toml"
 
 GLOBALIAS_FILTER_VALUES=(
   ls
@@ -36,7 +35,9 @@ plugins=(
   ripgrep
   terraform
   kubectl
+  my-aws-assume-role
   my-fzf
+  my-gcloud
   my-golang
   my-docker
   # my-goenv
@@ -64,24 +65,7 @@ alias fd='fd --hidden'
 alias kx='kubectx'
 alias yamllint='yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
 
-function assume-role() {
-  aws_sts_out=$(aws sts assume-role --role-arn $1 --role-session-name $2);\
-  export AWS_ACCESS_KEY_ID=$(echo $aws_sts_out | jq -r '.Credentials''.AccessKeyId');\
-  export AWS_SECRET_ACCESS_KEY=$(echo $aws_sts_out | jq -r '.Credentials''.SecretAccessKey');\
-  export AWS_SESSION_TOKEN=$(echo $aws_sts_out | jq -r '.Credentials''.SessionToken');
-}
-
-
-# The next line updates PATH for the Google Cloud SDK.
-[[ ! -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]] || source "${HOME}/google-cloud-sdk/path.zsh.inc" 
-
-# The next line enables shell command completion for gcloud.
-[[ ! -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]] || source "${HOME}/google-cloud-sdk/completion.zsh.inc" 
-
 export STARSHIP_CONFIG="${HOME}/dotfiles/starship.toml"
-
-# alias gam="/Users/bojan/bin/gam/gam"
 eval "$(starship init zsh)"
 
 source $ZSH/oh-my-zsh.sh
-
