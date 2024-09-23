@@ -1,15 +1,10 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
-then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 ZSH_D="${HOME}/dotfiles/zsh.d"
 ZSH="${ZSH_D}/oh-my-zsh"
 ZSH_CUSTOM="${ZSH_D}/oh-my-zsh-custom"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+STARSHIP_CONFIG="${HOME}/starship.toml"
+
 GLOBALIAS_FILTER_VALUES=(
   ls
-  exa
   grep
   tree
 )
@@ -26,6 +21,7 @@ export HISTDB_FZF_DEFAULT_MODE=4
 
 case "$OSTYPE" in
   darwin*)  [[ ! -f ${ZSH_D}/Darwin.zsh ]] || source ${ZSH_D}/Darwin.zsh ;; 
+  linux-android)   [[ ! -f ${ZSH_D}/LinuxAndroid.zsh ]] || source ${ZSH_D}/LinuxAndroid.zsh ;; 
   linux*)   [[ ! -f ${ZSH_D}/Linux.zsh ]] || source ${ZSH_D}/Linux.zsh ;; 
   *)        ;;
 esac
@@ -33,7 +29,6 @@ esac
 plugins=(
   aws
   fd
-  fzf
   globalias
   golang
   helm
@@ -41,6 +36,7 @@ plugins=(
   ripgrep
   terraform
   kubectl
+  my-fzf
   my-golang
   my-docker
   # my-goenv
@@ -48,14 +44,12 @@ plugins=(
   my-nvim
   my-pyenv
   my-krew
-  # # my-ssh
+  # my-ssh
   zsh-histdb
   zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-histdb-fzf
 )
-
-source $ZSH/oh-my-zsh.sh
 
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey '^U' backward-kill-line
@@ -77,8 +71,6 @@ function assume-role() {
   export AWS_SESSION_TOKEN=$(echo $aws_sts_out | jq -r '.Credentials''.SessionToken');
 }
 
-# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh.d/.p10k.zsh.
-[[ ! -f ${ZSH_D}/.p10k.zsh ]] || source ${ZSH_D}/.p10k.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
 [[ ! -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]] || source "${HOME}/google-cloud-sdk/path.zsh.inc" 
@@ -86,4 +78,10 @@ function assume-role() {
 # The next line enables shell command completion for gcloud.
 [[ ! -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]] || source "${HOME}/google-cloud-sdk/completion.zsh.inc" 
 
+export STARSHIP_CONFIG="${HOME}/dotfiles/starship.toml"
+
 # alias gam="/Users/bojan/bin/gam/gam"
+eval "$(starship init zsh)"
+
+source $ZSH/oh-my-zsh.sh
+
