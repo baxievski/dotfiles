@@ -18,6 +18,9 @@
 	excludesfile = /Users/bojan/.gitignore_global
 	autocrlf = input
 
+[pager]
+    diff = diffnav
+
 [status]
     short = true
     branch = true
