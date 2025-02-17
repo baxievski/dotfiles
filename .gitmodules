@@ -1,6 +1,3 @@
-[submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-histdb"]
-	path = zsh.d/oh-my-zsh-custom/plugins/zsh-histdb
-	url = https://github.com/larkery/zsh-histdb
 [submodule "zsh.d/oh-my-zsh"]
 	path = zsh.d/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
@@ -16,6 +13,12 @@
 [submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-histdb-fzf"]
 	path = zsh.d/oh-my-zsh-custom/plugins/zsh-histdb-fzf
 	url = https://github.com/m42e/zsh-histdb-fzf
-[submodule "nvim/neovim-config"]
-	path = nvim/neovim-config
-	url = https://github.com/ntk148v/neovim-config
+[submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-histdb"]
+	path = zsh.d/oh-my-zsh-custom/plugins/zsh-histdb
+	url = https://github.com/larkery/zsh-histdb
+[submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-bat"]
+	path = zsh.d/oh-my-zsh-custom/plugins/zsh-bat
+	url = https://github.com/fdellwing/zsh-bat.git
+[submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-you-should-use.git"]
+	path = zsh.d/oh-my-zsh-custom/plugins/zsh-you-should-use.git
+	url = https://github.com/MichaelAquilina/zsh-you-should-use.git
