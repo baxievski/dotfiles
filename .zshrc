@@ -6,17 +6,23 @@ GLOBALIAS_FILTER_VALUES=(
   ls
   grep
   tree
+  cat
+  {
+  *
+  $
 )
 
-export PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}"
-export TERM=xterm-256color
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+export PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
+export TERM="xterm-256color"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 export SAVEHIST=900000
 export HISTFILESIZE=9000000000
 export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 export HISTDB_FZF_DEFAULT_MODE=4
+export YSU_MESSAGE_POSITION="after"
+# export YSU_MESSAGE_FORMAT="Found existing %alias_type for "%command". You should use: "%alias""
 
 case "$OSTYPE" in
   darwin*)  [[ ! -f ${ZSH_D}/Darwin.zsh ]] || source ${ZSH_D}/Darwin.zsh ;; 
@@ -42,14 +48,16 @@ plugins=(
   my-docker
   # my-goenv
   my-rvm
+  my-mise
   my-nvim
   my-pyenv
   my-krew
   # my-ssh
   zsh-histdb
   zsh-syntax-highlighting
-  zsh-autosuggestions
   zsh-histdb-fzf
+  you-should-use
+  zsh-bat
 )
 
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
