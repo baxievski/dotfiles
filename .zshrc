@@ -3,6 +3,7 @@ ZSH="${ZSH_D}/oh-my-zsh"
 ZSH_CUSTOM="${ZSH_D}/oh-my-zsh-custom"
 
 GLOBALIAS_FILTER_VALUES=(
+  aws
   ls
   grep
   tree
@@ -22,7 +23,7 @@ export HISTSIZE=500000
 export HIST_STAMPS="yyyy-mm-dd"
 export HISTDB_FZF_DEFAULT_MODE=4
 export YSU_MESSAGE_POSITION="after"
-# export YSU_MESSAGE_FORMAT="Found existing %alias_type for "%command". You should use: "%alias""
+export YSU_MESSAGE_FORMAT="Found existing %alias_type for "%command". You should use: "%alias""
 
 case "$OSTYPE" in
   darwin*)  [[ ! -f ${ZSH_D}/Darwin.zsh ]] || source ${ZSH_D}/Darwin.zsh ;; 
@@ -41,6 +42,7 @@ plugins=(
   ripgrep
   terraform
   kubectl
+  my-awsv2
   my-aws-assume-role
   my-fzf
   my-gcloud
@@ -52,17 +54,21 @@ plugins=(
   my-nvim
   my-pyenv
   my-krew
-  # my-ssh
+  my-bat
   zsh-histdb
   zsh-syntax-highlighting
   zsh-histdb-fzf
   you-should-use
-  zsh-bat
 )
 
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey '^U' backward-kill-line
 bindkey '^R' histdb-fzf-widget
+
+export STARSHIP_CONFIG="${HOME}/dotfiles/starship.toml"
+eval "$(starship init zsh)"
+
+source $ZSH/oh-my-zsh.sh
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
 alias grep='grep --color=auto'
@@ -72,8 +78,3 @@ alias t='terraform'
 alias fd='fd --hidden'
 alias kx='kubectx'
 alias yamllint='yamllint -d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
-
-export STARSHIP_CONFIG="${HOME}/dotfiles/starship.toml"
-eval "$(starship init zsh)"
-
-source $ZSH/oh-my-zsh.sh
