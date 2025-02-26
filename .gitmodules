@@ -17,5 +17,5 @@
 	path = zsh.d/oh-my-zsh-custom/plugins/zsh-histdb
 	url = https://github.com/larkery/zsh-histdb
 [submodule "zsh.d/oh-my-zsh-custom/plugins/zsh-you-should-use"]
-	path = zsh.d/oh-my-zsh-custom/plugins/zsh-you-should-use.git
+	path = zsh.d/oh-my-zsh-custom/plugins/zsh-you-should-use
 	url = https://github.com/MichaelAquilina/zsh-you-should-use.git
