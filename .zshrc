@@ -5,6 +5,7 @@ ZSH_CUSTOM="${ZSH_D}/oh-my-zsh-custom"
 GLOBALIAS_FILTER_VALUES=(
   aws
   ls
+  eza
   grep
   tree
   cat
@@ -14,7 +15,6 @@ GLOBALIAS_FILTER_VALUES=(
 )
 
 export PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
-export TERM="xterm-256color"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export SAVEHIST=900000
@@ -42,23 +42,19 @@ plugins=(
   ripgrep
   terraform
   kubectl
-  my-awsv2
   my-aws-assume-role
   my-fzf
   my-gcloud
   my-golang
   my-docker
-  # my-goenv
   my-rvm
   my-mise
   my-nvim
-  my-pyenv
   my-krew
   my-bat
   zsh-histdb
   zsh-syntax-highlighting
   zsh-histdb-fzf
-  you-should-use
 )
 
 WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
@@ -71,9 +67,9 @@ eval "$(starship init zsh)"
 source $ZSH/oh-my-zsh.sh
 
 alias ls='ls --color=auto --group-directories-first -v --time-style=long-iso'
+alias eza='eza --color=auto --group-directories-first --time-style=long-iso'
 alias grep='grep --color=auto'
 alias tree='tree -N --dirsfirst'
-alias h='helm'
 alias t='terraform'
 alias fd='fd --hidden'
 alias kx='kubectx'

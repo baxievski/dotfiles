@@ -1,4 +1,4 @@
-if command -v "bat" &> /dev/null
+if [[ -x "$(command -v bat)" ]]; 
 then
     alias rcat="$(which cat)"
     alias cat='bat --style=plain'
